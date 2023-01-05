@@ -501,7 +501,7 @@
             this.xRotationTextbox.Name = "xRotationTextbox";
             this.xRotationTextbox.Size = new System.Drawing.Size(69, 22);
             this.xRotationTextbox.TabIndex = 25;
-            this.xRotationTextbox.Text = "0";
+            this.xRotationTextbox.Text = "90";
             this.xRotationTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.xRotationTextbox.Click += new System.EventHandler(this.panel5_Click);
             this.xRotationTextbox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textField_KeyDown);
@@ -716,7 +716,7 @@
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "NL2SplineExtractor";
             ((System.ComponentModel.ISupportInitialize)(this.nodesPerSplitSelector)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.piecesSelector)).EndInit();
             this.panel1.ResumeLayout(false);

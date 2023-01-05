@@ -41,7 +41,7 @@ namespace NL2SplineTrackExtractor
         private bool scaleAffectOffset = true;
 
         //Rotation
-        private float xRotation;
+        private float xRotation = 90;
         private float yRotation;
         private float zRotation;
 
@@ -51,7 +51,7 @@ namespace NL2SplineTrackExtractor
         private float zOffset;
 
         //Misc
-        private IFormatProvider usFormat = new CultureInfo("en-US"); //this is used to make sure the floats are read and written with a decimal point
+        private IFormatProvider usFormat = new CultureInfo("en-US"); //this is used to make sure the floats are read and written with a decimal point not comma
         private float deg2Rad = (float)Math.PI / 180f;
 
         public enum Axis
@@ -332,9 +332,19 @@ namespace NL2SplineTrackExtractor
             newZ = oldZ;
 
             //Offsets
-            newX += xOffset;
-            newY += yOffset;
-            newZ += zOffset;
+            if (scaleAffectOffset)
+            {
+                newX += xOffset * scale;
+                newY += yOffset * scale;
+                newZ += zOffset * scale;
+            }
+            else
+            {
+                newX += xOffset;
+                newY += yOffset;
+                newZ += zOffset;
+            }
+            
         }
 
         #endregion
@@ -603,9 +613,7 @@ namespace NL2SplineTrackExtractor
                 return false;
             }
         }
-
-        #endregion
-
         
+        #endregion
     }
 }
