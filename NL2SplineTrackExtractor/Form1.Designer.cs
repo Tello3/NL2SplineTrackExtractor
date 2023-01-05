@@ -48,6 +48,7 @@
             this.piecesSelector = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.roundTripChkbx = new System.Windows.Forms.CheckBox();
             this.numSplinePointsLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -301,12 +302,25 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.Controls.Add(this.roundTripChkbx);
             this.panel2.Controls.Add(this.numSplinePointsLabel);
             this.panel2.Controls.Add(this.label7);
             this.panel2.Location = new System.Drawing.Point(12, 5);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(487, 142);
             this.panel2.TabIndex = 21;
+            // 
+            // roundTripChkbx
+            // 
+            this.roundTripChkbx.AutoSize = true;
+            this.roundTripChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.roundTripChkbx.Location = new System.Drawing.Point(262, 104);
+            this.roundTripChkbx.Name = "roundTripChkbx";
+            this.roundTripChkbx.Size = new System.Drawing.Size(146, 20);
+            this.roundTripChkbx.TabIndex = 24;
+            this.roundTripChkbx.Text = "Connect end to start";
+            this.roundTripChkbx.UseVisualStyleBackColor = false;
+            this.roundTripChkbx.CheckedChanged += new System.EventHandler(this.roundTripChkbx_CheckedChanged);
             // 
             // numSplinePointsLabel
             // 
@@ -794,6 +808,7 @@
         private System.Windows.Forms.TextBox xOffsetTextbox;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox affectOffsetCheckbox;
+        private System.Windows.Forms.CheckBox roundTripChkbx;
     }
 }
 

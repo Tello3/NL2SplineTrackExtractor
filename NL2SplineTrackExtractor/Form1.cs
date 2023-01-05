@@ -30,6 +30,7 @@ namespace NL2SplineTrackExtractor
         private int nodesPerSplit;
         //Cut into pieces
         private int numPieces;
+        private bool roundTrip = false;
 
         //Scaling
         private float scale = 1;
@@ -186,6 +187,7 @@ namespace NL2SplineTrackExtractor
 
         private void extractTrackSplines()
         {
+            
             for (int i = 0; i < splitPoints.Count - 1; i++)
             {
                 string currentPath = outputFolderPath + "\\Track" + i;
@@ -193,31 +195,33 @@ namespace NL2SplineTrackExtractor
 
                 int from = splitPoints[i];
                 int to = splitPoints[i + 1];
+                bool last = (i+1 >= splitPoints.Count-1) && roundTrip;
+
                 
                 if (centerChkbx.Checked)
                 {
-                    extractCenter(from, to, currentPath);
+                    extractCenter(from, to, currentPath, last);
                 }
                 if (topChkbx.Checked)
                 {
-                    extractTop(from, to, currentPath);
+                    extractTop(from, to, currentPath, last);
                 }
                 if (bottomChkbx.Checked)
                 {
-                    extractBottom(from, to, currentPath);
+                    extractBottom(from, to, currentPath, last);
                 }
                 if (leftChkbx.Checked)
                 {
-                    extractLeft(from, to, currentPath);
+                    extractLeft(from, to, currentPath, last);
                 }
                 if (rightChkbx.Checked)
                 {
-                    extractRight(from, to, currentPath);
+                    extractRight(from, to, currentPath, last);
                 }
             }
         }
 
-        private void extractRight(int from, int to, string savePath)
+        private void extractRight(int from, int to, string savePath, bool last)
         {
             string lines = "";
 
@@ -232,10 +236,20 @@ namespace NL2SplineTrackExtractor
                 lines += newZ.ToString(usFormat);
                 lines += "\n";
             }
+            if (last) // add the first point for full round trip
+            {
+                float x = position[((int)Axis.x)][0] - left[((int)Axis.x)][0] * rightScale;
+                float y = position[((int)Axis.y)][0] - left[((int)Axis.y)][0] * rightScale;
+                float z = position[((int)Axis.z)][0] - left[((int)Axis.z)][0] * rightScale;
+                rotateAndOffset(x, y, z, out float newX, out float newY, out float newZ);
+                lines += newX.ToString(usFormat) + ",";
+                lines += newY.ToString(usFormat) + ",";
+                lines += newZ.ToString(usFormat);
+            }
             File.WriteAllText(savePath+"\\Right.csv", lines);
         }
 
-        private void extractCenter(int from, int to, string savePath)
+        private void extractCenter(int from, int to, string savePath, bool last)
         {
             string lines = "";
 
@@ -250,10 +264,20 @@ namespace NL2SplineTrackExtractor
                 lines += newZ.ToString(usFormat);
                 lines += "\n";
             }
+            if (last) // add the first point for full round trip
+            {
+                float x = position[((int)Axis.x)][0];
+                float y = position[((int)Axis.y)][0];
+                float z = position[((int)Axis.z)][0];
+                rotateAndOffset(x, y, z, out float newX, out float newY, out float newZ);
+                lines += newX.ToString(usFormat) + ",";
+                lines += newY.ToString(usFormat) + ",";
+                lines += newZ.ToString(usFormat);
+            }
             File.WriteAllText(savePath + "\\Center.csv", lines);
         }
 
-        private void extractLeft(int from, int to, string savePath)
+        private void extractLeft(int from, int to, string savePath, bool last)
         {
             string lines = "";
 
@@ -268,10 +292,20 @@ namespace NL2SplineTrackExtractor
                 lines += newZ.ToString(usFormat);
                 lines += "\n";
             }
+            if (last) // add the first point for full round trip
+            {
+                float x = position[((int)Axis.x)][0] + left[((int)Axis.x)][0] * leftScale;
+                float y = position[((int)Axis.y)][0] + left[((int)Axis.y)][0] * leftScale;
+                float z = position[((int)Axis.z)][0] + left[((int)Axis.z)][0] * leftScale;
+                rotateAndOffset(x, y, z, out float newX, out float newY, out float newZ);
+                lines += newX.ToString(usFormat) + ",";
+                lines += newY.ToString(usFormat) + ",";
+                lines += newZ.ToString(usFormat);
+            }
             File.WriteAllText(savePath + "\\Left.csv", lines);
         }
 
-        private void extractTop(int from, int to, string savePath)
+        private void extractTop(int from, int to, string savePath, bool last)
         {
             string lines = "";
 
@@ -286,10 +320,20 @@ namespace NL2SplineTrackExtractor
                 lines += newZ.ToString(usFormat);
                 lines += "\n";
             }
+            if (last) // add the first point for full round trip
+            {
+                float x = position[((int)Axis.x)][0] + up[((int)Axis.x)][0] * topScale;
+                float y = position[((int)Axis.y)][0] + up[((int)Axis.y)][0] * topScale;
+                float z = position[((int)Axis.z)][0] + up[((int)Axis.z)][0] * topScale;
+                rotateAndOffset(x, y, z, out float newX, out float newY, out float newZ);
+                lines += newX.ToString(usFormat) + ",";
+                lines += newY.ToString(usFormat) + ",";
+                lines += newZ.ToString(usFormat);
+            }
             File.WriteAllText(savePath + "\\Top.csv", lines);
         }
 
-        private void extractBottom(int from, int to, string savePath)
+        private void extractBottom(int from, int to, string savePath, bool last)
         {
             string lines = "";
 
@@ -303,6 +347,16 @@ namespace NL2SplineTrackExtractor
                 lines += newY.ToString(usFormat) + ",";
                 lines += newZ.ToString(usFormat);
                 lines += "\n";
+            }
+            if(last) // add the first point for full round trip
+            {
+                float x = position[((int)Axis.x)][0] - up[((int)Axis.x)][0] * bottomScale;
+                float y = position[((int)Axis.y)][0] - up[((int)Axis.y)][0] * bottomScale;
+                float z = position[((int)Axis.z)][0] - up[((int)Axis.z)][0] * bottomScale;
+                rotateAndOffset(x, y, z, out float newX, out float newY, out float newZ);
+                lines += newX.ToString(usFormat) + ",";
+                lines += newY.ToString(usFormat) + ",";
+                lines += newZ.ToString(usFormat);
             }
             File.WriteAllText(savePath + "\\Bottom.csv", lines);
         }
@@ -591,6 +645,11 @@ namespace NL2SplineTrackExtractor
             }
         }
 
+        private void roundTripChkbx_CheckedChanged(object sender, EventArgs e)
+        {
+            roundTrip = ((CheckBox)sender).Checked;
+        }
+
         #endregion
 
         private void UpdateNumSplinePoints()
@@ -613,7 +672,8 @@ namespace NL2SplineTrackExtractor
                 return false;
             }
         }
-        
+
         #endregion
+
     }
 }
