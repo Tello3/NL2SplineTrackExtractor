@@ -31,9 +31,6 @@ namespace NL2SplineTrackExtractor
         //Cut into pieces
         private int numPieces;
 
-        private float deg2Rad = (float)Math.PI / 180f;
-
-
         //Scaling
         private float scale = 1;
         private float topScale = 1;
@@ -42,10 +39,12 @@ namespace NL2SplineTrackExtractor
         private float rightScale = 1;
         private bool scaleAffectDistances = true;
         private bool scaleAffectOffset = true;
+
         //Rotation
         private float xRotation;
         private float yRotation;
         private float zRotation;
+
         //Offset
         private float xOffset;
         private float yOffset;
@@ -53,6 +52,7 @@ namespace NL2SplineTrackExtractor
 
         //Misc
         private IFormatProvider usFormat = new CultureInfo("en-US"); //this is used to make sure the floats are read and written with a decimal point
+        private float deg2Rad = (float)Math.PI / 180f;
 
         public enum Axis
         {
@@ -67,78 +67,14 @@ namespace NL2SplineTrackExtractor
         public Form1()
         {
             InitializeComponent();
+            
             splitTypeSelector.Items.AddRange(new string[] { "Dont't split", "Split after x nodes", "Split into x pieces" });
             splitTypeSelector.SelectedIndex = 0;
             nodesPerSplitSelector.Minimum = 1;
             piecesSelector.Minimum = 1;
-            this.ActiveControl = inputPathChangeBtn;
-            Debug.WriteLine(deg2Rad);
-        }
 
-
-
-        private bool loadData()
-        {
-            if(inputFilePath== null)
-            {
-                MessageBox.Show("Please select an input file", "No input file selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            try
-            {
-                IEnumerable<string> lines = File.ReadLines(inputFilePath);
-                position = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
-                left = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
-                up = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
-                lines = lines.Skip(1); //Headers;
-                foreach (string line in lines)
-                {
-                    addLineToData(line);
-                }
-            }
-            catch (IOException e)
-            {
-                MessageBox.Show($"Error while loading the input file: {e.Message}", "Error while loading", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
-        }
-        private int getNumPointsPerSpline()
-        {
-            if (inputFilePath == null)
-            {
-                MessageBox.Show("Please select an input file", "No input file selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return -1;
-            }
-            try
-            {
-                IEnumerable<string> lines = File.ReadLines(inputFilePath);
-                return lines.Count() - 1;//-1 for headers
-            }
-            catch (IOException e)
-            {
-                MessageBox.Show($"Error while loading the input file: {e.Message}", "Error while loading", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return -1;
-            }
-        }
-        private void addLineToData(string line)
-        {
-            string[] values = line.Split('\t');
-            float normalScale = scaleAffectDistances ? scale : 1;
-            float[] floatValues = values.Select<string, float>(s => float.Parse(s, usFormat)).ToArray();
-                                                                        //0: No.
-            position[((int)Axis.x)].Add(floatValues[1] * scale);        //1: posx
-            position[((int)Axis.y)].Add(floatValues[2] * scale);        //2: posy
-            position[((int)Axis.z)].Add(floatValues[3] * scale);        //3: posz
-                                                                        //4: frontx
-                                                                        //5: fronty
-                                                                        //6: frontz
-            left[((int)Axis.x)].Add(floatValues[7] * normalScale);      //7: leftx
-            left[((int)Axis.y)].Add(floatValues[8] * normalScale);      //8: lefty
-            left[((int)Axis.z)].Add(floatValues[9] * normalScale);      //9: leftz
-            up[((int)Axis.x)].Add(floatValues[10] * normalScale);       //10: upx
-            up[((int)Axis.y)].Add(floatValues[11] * normalScale);       //11: upy
-            up[((int)Axis.z)].Add(floatValues[12] * normalScale);       //12: upz
+            //make sure no textbox is focused
+            this.ActiveControl = inputPathChangeBtn; 
         }
 
         private void calculateSplines()
@@ -167,6 +103,7 @@ namespace NL2SplineTrackExtractor
             {
                 MessageBox.Show("Please select a valid output folder", "Invalid output directory", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
             caluclateBtn.Enabled = true;
             inputPathTextBox.Enabled = true;
             inputPathChangeBtn.Enabled = true;
@@ -174,14 +111,89 @@ namespace NL2SplineTrackExtractor
             outputPathTextbox.Enabled = true;
         }
 
+        #region DataLoading
+        
+        private int getNumPointsPerSpline()
+        {
+            if (inputFilePath == null)
+            {
+                MessageBox.Show("Please select an input file", "No input file selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return -1;
+            }
+            try
+            {
+                IEnumerable<string> lines = File.ReadLines(inputFilePath);
+                return lines.Count() - 1;//-1 for headers
+            }
+            catch (IOException e)
+            {
+                MessageBox.Show($"Error while loading the input file: {e.Message}", "Error while loading", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return -1;
+            }
+        }
+        
+        private bool loadData()
+        {
+            if(inputFilePath== null)
+            {
+                MessageBox.Show("Please select an input file", "No input file selected", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+            try
+            {
+                IEnumerable<string> lines = File.ReadLines(inputFilePath);
+                position = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
+                left = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
+                up = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
+                lines = lines.Skip(1); //Headers;
+                foreach (string line in lines)
+                {
+                    addLineToData(line);
+                }
+            }
+            catch (IOException e)
+            {
+                MessageBox.Show($"Error while loading the input file: {e.Message}", "Error while loading", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+        
+        private void addLineToData(string line)
+        {
+            string[] values = line.Split('\t');
+            float normalScale = scaleAffectDistances ? scale : 1;
+            float[] floatValues = values.Select<string, float>(s => float.Parse(s, usFormat)).ToArray();
+
+                                                                        //0: No.
+            position[((int)Axis.x)].Add(floatValues[1] * scale);        //1: posx
+            position[((int)Axis.y)].Add(floatValues[2] * scale);        //2: posy
+            position[((int)Axis.z)].Add(floatValues[3] * scale);        //3: posz
+                                                                        //4: frontx
+                                                                        //5: fronty
+                                                                        //6: frontz
+            left[((int)Axis.x)].Add(floatValues[7] * normalScale);      //7: leftx
+            left[((int)Axis.y)].Add(floatValues[8] * normalScale);      //8: lefty
+            left[((int)Axis.z)].Add(floatValues[9] * normalScale);      //9: leftz
+            up[((int)Axis.x)].Add(floatValues[10] * normalScale);       //10: upx
+            up[((int)Axis.y)].Add(floatValues[11] * normalScale);       //11: upy
+            up[((int)Axis.z)].Add(floatValues[12] * normalScale);       //12: upz
+        }
+
+        #endregion
+
+        #region Extraction
+
         private void extractTrackSplines()
         {
             for (int i = 0; i < splitPoints.Count - 1; i++)
             {
                 string currentPath = outputFolderPath + "\\Track" + i;
                 Directory.CreateDirectory(currentPath);
+
                 int from = splitPoints[i];
                 int to = splitPoints[i + 1];
+                
                 if (centerChkbx.Checked)
                 {
                     extractCenter(from, to, currentPath);
@@ -205,7 +217,6 @@ namespace NL2SplineTrackExtractor
             }
         }
 
-        #region Extraction
         private void extractRight(int from, int to, string savePath)
         {
             string lines = "";
@@ -298,7 +309,7 @@ namespace NL2SplineTrackExtractor
 
         private void rotateAndOffset(float x, float y, float z, out float newX, out float newY, out float newZ)
         {
-            //Rotation * deg2Rad
+            //Rotation
             // X Axis
             newX = x;
             newY = y * (float)Math.Cos(xRotation * deg2Rad) - z * (float)Math.Sin(xRotation * deg2Rad);
@@ -329,6 +340,7 @@ namespace NL2SplineTrackExtractor
         #endregion
 
         #region SplitPoints
+
         private void findSplitPoints()
         {
             splitPoints = new List<int>();
@@ -343,29 +355,31 @@ namespace NL2SplineTrackExtractor
                     break;
                 case SplitTypes.nodes:
                     {
-                        findSplitPointsDistance(nodesPerSplit);
+                        findSplitPointsForDistance(nodesPerSplit);
                     }
                     break;
                 case SplitTypes.pieces:
                     {
-                        findSplitPointsDistance(position[0].Count / numPieces);
+                        findSplitPointsForDistance(position[0].Count / numPieces);
                     }
                     break;
             }
             splitPoints.Add(position[0].Count-1);
         }
-        private void findSplitPointsDistance(int nodesPerSplit)
+        private void findSplitPointsForDistance(int nodesPerSplit)
         {
             for (int i = nodesPerSplit-1; i < position[0].Count - nodesPerSplit; i += nodesPerSplit) {
 
                 splitPoints.Add(i);
             }
         }
+
         #endregion
 
         #region UI
 
         #region Events
+
         private void inputPathChangeBtn_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog openFileDialog = new OpenFileDialog())
@@ -603,6 +617,7 @@ namespace NL2SplineTrackExtractor
         }
 
         #endregion
+
         private void UpdateNumSplinePoints()
         {
             int num = getNumPointsPerSpline();
