@@ -4,15 +4,15 @@ A tool to extract individual track rails spline data from No Limits 2 Spline Dat
 ![image](https://user-images.githubusercontent.com/109047611/210702032-1377828b-f68e-45d1-bf02-2b3f65079384.png)
 
 # Features
-  -Extract individual splines (e.g left, right, center,...)
+  - Extract individual splines (e.g left, right, center,...)
   
-  -Split spline data, into a desired number of pieces, or after a desired number of points, for easier handling/modeling
+  - Split spline data, into a desired number of pieces, or after a desired number of points, for easier handling/modeling
   
-  -Rotate the coaster around the x,y and z Axes
+  - Rotate the coaster around the x,y and z Axes
  
-  -Offset the coaster
+  - Offset the coaster
   
-  -Scale the coaster
+  - Scale the coaster
   
   -Specify the distance of each rail to the center spline
  
