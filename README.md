@@ -14,7 +14,7 @@ A tool to extract individual track rails spline data from No Limits 2 Spline Dat
   
   - Scale the coaster
   
-  -Specify the distance of each rail to the center spline
+  - Specify the distance of each rail to the center spline
  
  # How to use
   - Extract .exe from .zip that can be downloaded in releases
