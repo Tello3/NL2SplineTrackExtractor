@@ -29,9 +29,9 @@ A tool to extract individual track rails spline data from No Limits 2 Spline Dat
   
   - Select a split type
       
-      -Split after x nodes will split the data into splines of x amount of points the last spline will be made up of the remaining points
-      
-      -Split into x pieces will split the data into evenly sized splines (If the number of points cant be split into x pieces the last spline will be bigger)
+      - Split after x nodes will split the data into splines of x amount of points the last spline will be made up of the remaining points
+       
+      - Split into x pieces will split the data into evenly sized splines (If the number of points cant be split into x pieces the last spline will be bigger)
   
   - Adjust the other settings to you liking (Note: for Fusion 360 you'll want to rotate 90° along the x axis)
   
