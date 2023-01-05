@@ -458,11 +458,8 @@ namespace NL2SplineTrackExtractor
 
         private void scalingTextbox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
                 scale = value;
-            
-            
         }
 
         private void affectDistancesCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -482,46 +479,31 @@ namespace NL2SplineTrackExtractor
 
         private void inputPathTextBox_LostFocus(object sender, EventArgs e)
         {
-            
             UpdateNumSplinePoints();
-            
-            
         }
 
         private void topDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
-                topScale = value / 10f;
-            
-            
+                topScale = value / 10f; 
         }
 
         private void rightDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
                 rightScale = value / 10f;
-            
-            
         }
 
         private void bottomDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
                 bottomScale = value / 10f;
-            
-            
         }
 
         private void leftDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox) sender, out float value))
                 leftScale = value / 10f;
-            
-            
         }
 
         private void affectOffsetCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -531,34 +513,24 @@ namespace NL2SplineTrackExtractor
 
         private void xOffsetTextbox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
-                xOffset = value;
-            
-            
+                xOffset = value; 
         }
 
         private void yOffsetTextbox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
                 yOffset = value;
-            
-            
         }
 
         private void zOffsetTextbox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
                 zOffset = value;
-            
-            
         }
 
         private void xRotationTextbox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
             {
                 if(xRotation != value)
@@ -567,13 +539,10 @@ namespace NL2SplineTrackExtractor
                     xRotationTextbox.Text = xRotation.ToString(usFormat);
                 }
             }
-            
-            
         }
 
         private void yRotationTextbox_LostFocus(object sender, EventArgs e)
-        {
-            
+        {   
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
             {
                 if (yRotation != value)
@@ -582,13 +551,10 @@ namespace NL2SplineTrackExtractor
                     yRotationTextbox.Text = yRotation.ToString(usFormat);
                 }
             }
-            
-            
         }
 
         private void zRotationTextbox_LostFocus(object sender, EventArgs e)
         {
-            
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
             {
                 if (zRotation != value)
@@ -612,7 +578,6 @@ namespace NL2SplineTrackExtractor
             {
                 this.ActiveControl = null;//revoke focus
                 e.Handled = true;
-
             }
         }
 
