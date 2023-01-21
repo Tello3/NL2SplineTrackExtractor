@@ -258,7 +258,7 @@
             // 
             this.nodesPerSplitSelector.Location = new System.Drawing.Point(38, 65);
             this.nodesPerSplitSelector.Minimum = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -266,7 +266,7 @@
             this.nodesPerSplitSelector.Size = new System.Drawing.Size(120, 22);
             this.nodesPerSplitSelector.TabIndex = 17;
             this.nodesPerSplitSelector.Value = new decimal(new int[] {
-            1,
+            2,
             0,
             0,
             0});
@@ -285,9 +285,19 @@
             // piecesSelector
             // 
             this.piecesSelector.Location = new System.Drawing.Point(38, 65);
+            this.piecesSelector.Minimum = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.piecesSelector.Name = "piecesSelector";
             this.piecesSelector.Size = new System.Drawing.Size(120, 22);
             this.piecesSelector.TabIndex = 19;
+            this.piecesSelector.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            0});
             this.piecesSelector.ValueChanged += new System.EventHandler(this.piecesSelector_ValueChanged);
             // 
             // panel1

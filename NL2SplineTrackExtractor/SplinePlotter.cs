@@ -6,24 +6,28 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace NL2SplineTrackExtractor
 {
     public partial class SplinePlotter : UserControl
     {
 
-        public List<float>[] splinePoints;
-        public List<int> splitPoints;
+        private List<float>[] splinePoints;
+        private List<int> splitPoints;
 
-        public bool isMouseDown;
-        public Point lastMouseDragPosition = Point.Empty;
-        public PointF offset = Point.Empty;
-        public float scale = 1;
-        public const float scaleSensitivity = 0.001f;
+        private bool isMouseDown = false;
+        private Point lastMouseDragPosition = Point.Empty;
+        private PointF offset = Point.Empty;
+        private float scale = 1;
+        private const float zoomSensitivity = 0.001f;
+
+        private bool roundTrip;
 
         public SplinePlotter()
         {
@@ -38,18 +42,55 @@ namespace NL2SplineTrackExtractor
 
         private void DoPaint(object sender, PaintEventArgs e)
         {
-            if (splinePoints == null) return;
+            if (splinePoints == null || splitPoints == null) return;
 
-            Pen p = new Pen(Color.LightGreen, 2);
-            List<PointF> pointsTop = new List<PointF>();
-            for(int i = 0; i < splinePoints[0].Count; i++)
+            Pen p1 = new Pen(Color.LightGreen, 2);
+            Pen p2 = new Pen(Color.Red, 2);
+            Pen nodePen = new Pen(Color.White, 2);
+
+            Pen currentPen = p1;
+           
+            for (int i = 0; i < splitPoints.Count - 1; i++)
             {
-                float x = splinePoints[((int)Form1.Axis.x)][i] * (float)Math.Exp(scale) + offset.X;
-                float y = splinePoints[((int)Form1.Axis.z)][i] * (float)Math.Exp(scale) + offset.Y;
+                int from = splitPoints[i];
+                int to = splitPoints[i + 1];
+                bool last = (i + 1 >= splitPoints.Count - 1) && roundTrip;
 
-                pointsTop.Add(new PointF(x, y));
+                List<PointF> pointsTop = new List<PointF>();
+                for (int j = from; j <= to; j++)
+                {
+                    float x = splinePoints[((int)Form1.Axis.x)][j] * (float)Math.Exp(scale) + offset.X;
+                    float y = splinePoints[((int)Form1.Axis.z)][j] * (float)Math.Exp(scale) + offset.Y;
+
+                    pointsTop.Add(new PointF(x, y));
+                }
+                if(last)
+                {
+                    float x = splinePoints[((int)Form1.Axis.x)][0] * (float)Math.Exp(scale) + offset.X;
+                    float y = splinePoints[((int)Form1.Axis.z)][0] * (float)Math.Exp(scale) + offset.Y;
+
+                    pointsTop.Add(new PointF(x, y));
+                }
+                else
+                {
+                    float x = splinePoints[((int)Form1.Axis.x)][to] * (float)Math.Exp(scale) + offset.X;
+                    float y = splinePoints[((int)Form1.Axis.z)][to] * (float)Math.Exp(scale) + offset.Y;
+
+                }
+
+                e.Graphics.DrawLines(currentPen, pointsTop.ToArray());
+
+                if (roundTrip)
+                {
+                    float startX = splinePoints[((int)Form1.Axis.x)][0] * (float)Math.Exp(scale) + offset.X;
+                    float startY = splinePoints[((int)Form1.Axis.z)][0] * (float)Math.Exp(scale) + offset.Y;
+                    e.Graphics.DrawEllipse(nodePen, startX - 2, startY - 2, 4, 4);
+                }
+
+                if (currentPen == p1)
+                    currentPen = p2;
+                else currentPen = p1;
             }
-            e.Graphics.DrawLines(p, pointsTop.ToArray());
         }
 
         private void OnZoom(object sender, MouseEventArgs e)
@@ -59,10 +100,10 @@ namespace NL2SplineTrackExtractor
 
         private void adjustZoom(int delta, Point mousePosition)
         {
-            if (Math.Exp(scale + scaleSensitivity * delta) > 0)
+            if (Math.Exp(scale + zoomSensitivity * delta) > 0) //Exp makes a more linear zoom
             {
                 float oldScale = scale;
-                scale += scaleSensitivity * delta;
+                scale += zoomSensitivity * delta;
 
                 offset.X = mousePosition.X - (mousePosition.X - offset.X) * (float)Math.Exp(scale) / (float)Math.Exp(oldScale);
                 offset.Y = mousePosition.Y - (mousePosition.Y - offset.Y) * (float)Math.Exp(scale) / (float)Math.Exp(oldScale);
@@ -108,6 +149,12 @@ namespace NL2SplineTrackExtractor
             renderSpline();
         }
 
+        public void setRoundTrip(bool flag)
+        {
+            roundTrip = flag;
+            renderSpline();
+        }
+
         private void initializeSplitPoints()
         {
             splitPoints = new List<int>() { 0, splinePoints.Length};
@@ -115,6 +162,7 @@ namespace NL2SplineTrackExtractor
         public void setSplitPoints(List<int> splitPoints)
         {
             this.splitPoints = splitPoints;
+            renderSpline();
         }
 
         private void renderSpline()

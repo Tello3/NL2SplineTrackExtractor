@@ -27,9 +27,9 @@ namespace NL2SplineTrackExtractor
         private List<int> splitPoints;
         private SplitTypes splitType;
         //Cut by nodes
-        private int nodesPerSplit;
+        private int nodesPerSplit = 2;
         //Cut into pieces
-        private int numPieces;
+        private int numPieces = 2;
         private bool roundTrip = false;
 
         //Scaling
@@ -75,7 +75,8 @@ namespace NL2SplineTrackExtractor
             piecesSelector.Minimum = 1;
 
             //make sure no textbox is focused
-            this.ActiveControl = inputPathChangeBtn; 
+            this.ActiveControl = inputPathChangeBtn;
+            findSplitPoints();
         }
 
         private void calculateSplines()
@@ -90,7 +91,6 @@ namespace NL2SplineTrackExtractor
             {
                 if (loadData())
                 {
-                    findSplitPoints();
                     extractTrackSplines();
 
                     DialogResult result = MessageBox.Show($"Extraction finished without errors! \nDo you want to open the output folder?", "Extraction finished!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
@@ -156,6 +156,7 @@ namespace NL2SplineTrackExtractor
                 }
 
                 splinePlotter.setSplinePoints(position);
+                findSplitPoints();
             }
             catch (IOException e)
             {
@@ -195,11 +196,12 @@ namespace NL2SplineTrackExtractor
             
             for (int i = 0; i < splitPoints.Count - 1; i++)
             {
+                int from = splitPoints[i];
+                int to = splitPoints[i + 1];
+                
                 string currentPath = outputFolderPath + "\\Track" + i;
                 Directory.CreateDirectory(currentPath);
 
-                int from = splitPoints[i];
-                int to = splitPoints[i + 1];
                 bool last = (i+1 >= splitPoints.Count-1) && roundTrip;
 
                 
@@ -412,6 +414,8 @@ namespace NL2SplineTrackExtractor
 
         private void findSplitPoints()
         {
+            if (position == null) return;
+
             splitPoints = new List<int>();
             splitPoints.Add(0);
 
@@ -429,17 +433,24 @@ namespace NL2SplineTrackExtractor
                     break;
                 case SplitTypes.pieces:
                     {
-                        findSplitPointsForDistance(position[0].Count / numPieces);
+                        findSplitPointsForDistance((int)Math.Ceiling(position[0].Count / (double)numPieces));
                     }
                     break;
             }
             splitPoints.Add(position[0].Count-1);
+            splinePlotter.setSplitPoints(splitPoints);
         }
         private void findSplitPointsForDistance(int nodesPerSplit)
         {
-            for (int i = nodesPerSplit-1; i < position[0].Count - nodesPerSplit; i += nodesPerSplit) {
-
-                splitPoints.Add(i);
+            int i = nodesPerSplit; 
+            while(i < position[0].Count){
+                
+                if((position[0].Count - 1) - (i) < 2) 
+                {
+                    return;
+                }
+                else splitPoints.Add(i);
+                i += nodesPerSplit;
             }
         }
 
@@ -527,6 +538,7 @@ namespace NL2SplineTrackExtractor
                     }
                     break;
             }
+            findSplitPoints();
         }
 
         private void scalingTextbox_LostFocus(object sender, EventArgs e)
@@ -543,11 +555,13 @@ namespace NL2SplineTrackExtractor
         private void piecesSelector_ValueChanged(object sender, EventArgs e)
         {
             numPieces = (int)((NumericUpDown)sender).Value;
+            findSplitPoints();
         }
 
         private void nodesPerSplitSelector_ValueChanged(object sender, EventArgs e)
         {
             nodesPerSplit = (int)((NumericUpDown)sender).Value;
+            findSplitPoints();
         }
 
  
@@ -654,6 +668,7 @@ namespace NL2SplineTrackExtractor
         private void roundTripChkbx_CheckedChanged(object sender, EventArgs e)
         {
             roundTrip = ((CheckBox)sender).Checked;
+            splinePlotter.setRoundTrip(roundTrip);
         }
 
         #endregion
