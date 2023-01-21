@@ -97,15 +97,13 @@ namespace NL2SplineTrackExtractor
 
             if (Directory.Exists(outputFolderPath))
             {
-                if (loadData())
-                {
-                    extractTrackSplines();
+                findSplitPoints();
+                extractTrackSplines();
 
-                    DialogResult result = MessageBox.Show($"Extraction finished without errors! \nDo you want to open the output folder?", "Extraction finished!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    if (result == DialogResult.Yes)
-                    {
-                        Process.Start(outputFolderPath);
-                    }
+                DialogResult result = MessageBox.Show($"Extraction finished without errors! \nDo you want to open the output folder?", "Extraction finished!", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                if (result == DialogResult.Yes)
+                {
+                    Process.Start(outputFolderPath);
                 }
             }
             else
