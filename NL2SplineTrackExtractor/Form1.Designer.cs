@@ -83,6 +83,9 @@
             this.yOffsetTextbox = new System.Windows.Forms.TextBox();
             this.xOffsetTextbox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.splinePlotter = new NL2SplineTrackExtractor.SplinePlotter();
+            this.label20 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nodesPerSplitSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.piecesSelector)).BeginInit();
             this.panel1.SuspendLayout();
@@ -92,6 +95,7 @@
             this.panel5.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel8.SuspendLayout();
             this.SuspendLayout();
             // 
             // inputPathTextBox
@@ -289,6 +293,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.splitTypeSelector);
             this.panel1.Controls.Add(this.xLabel);
@@ -302,6 +307,7 @@
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.roundTripChkbx);
             this.panel2.Controls.Add(this.numSplinePointsLabel);
             this.panel2.Controls.Add(this.label7);
@@ -314,7 +320,7 @@
             // 
             this.roundTripChkbx.AutoSize = true;
             this.roundTripChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.roundTripChkbx.Location = new System.Drawing.Point(262, 104);
+            this.roundTripChkbx.Location = new System.Drawing.Point(321, 104);
             this.roundTripChkbx.Name = "roundTripChkbx";
             this.roundTripChkbx.Size = new System.Drawing.Size(146, 20);
             this.roundTripChkbx.TabIndex = 24;
@@ -339,13 +345,14 @@
             this.label7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label7.Location = new System.Drawing.Point(12, 105);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(127, 16);
+            this.label7.Size = new System.Drawing.Size(87, 16);
             this.label7.TabIndex = 17;
-            this.label7.Text = "Center spline points:";
+            this.label7.Text = "Spline points:";
             // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label2);
             this.panel3.Location = new System.Drawing.Point(505, 5);
             this.panel3.Name = "panel3";
@@ -355,6 +362,7 @@
             // panel4
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel4.Controls.Add(this.label19);
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.label17);
@@ -466,6 +474,7 @@
             // panel5
             // 
             this.panel5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel5.Controls.Add(this.label13);
             this.panel5.Controls.Add(this.label8);
             this.panel5.Controls.Add(this.label14);
@@ -592,6 +601,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Controls.Add(this.affectOffsetCheckbox);
             this.panel6.Controls.Add(this.scalingTextbox);
             this.panel6.Controls.Add(this.affectDistancesCheckbox);
@@ -617,6 +627,7 @@
             // panel7
             // 
             this.panel7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel7.Controls.Add(this.label12);
             this.panel7.Controls.Add(this.label11);
             this.panel7.Controls.Add(this.label10);
@@ -705,11 +716,41 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "Offset (applied after rotation)";
             // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel8.Controls.Add(this.splinePlotter);
+            this.panel8.Controls.Add(this.label20);
+            this.panel8.Location = new System.Drawing.Point(758, 5);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(595, 385);
+            this.panel8.TabIndex = 24;
+            // 
+            // splinePlotter
+            // 
+            this.splinePlotter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.splinePlotter.Location = new System.Drawing.Point(20, 37);
+            this.splinePlotter.Name = "splinePlotter";
+            this.splinePlotter.Size = new System.Drawing.Size(557, 331);
+            this.splinePlotter.TabIndex = 12;
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label20.Location = new System.Drawing.Point(3, 4);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(80, 16);
+            this.label20.TabIndex = 11;
+            this.label20.Text = "Cut Preview:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(760, 397);
+            this.ClientSize = new System.Drawing.Size(1365, 397);
+            this.Controls.Add(this.panel8);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -747,6 +788,8 @@
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -809,6 +852,9 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.CheckBox affectOffsetCheckbox;
         private System.Windows.Forms.CheckBox roundTripChkbx;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Label label20;
+        private SplinePlotter splinePlotter;
     }
 }
 

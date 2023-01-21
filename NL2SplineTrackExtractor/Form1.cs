@@ -147,10 +147,15 @@ namespace NL2SplineTrackExtractor
                 left = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
                 up = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
                 lines = lines.Skip(1); //Headers;
+
+                UpdateNumSplinePoints(lines.Count());
+                
                 foreach (string line in lines)
                 {
                     addLineToData(line);
                 }
+
+                splinePlotter.setSplinePoints(position);
             }
             catch (IOException e)
             {
@@ -457,7 +462,7 @@ namespace NL2SplineTrackExtractor
                 {
                     inputPathTextBox.Text = openFileDialog.FileName;
                     inputFilePath = openFileDialog.FileName;
-                    UpdateNumSplinePoints();
+                    loadData();
                 }
             }
         }
@@ -465,6 +470,10 @@ namespace NL2SplineTrackExtractor
         private void inputPathTextBox_TextChanged(object sender, EventArgs e)
         {
             inputFilePath = ((TextBox)sender).Text;
+        }
+        private void inputPathTextBox_LostFocus(object sender, EventArgs e)
+        {
+            loadData();
         }
 
         private void caluclateBtn_Click(object sender, EventArgs e)
@@ -541,10 +550,7 @@ namespace NL2SplineTrackExtractor
             nodesPerSplit = (int)((NumericUpDown)sender).Value;
         }
 
-        private void inputPathTextBox_LostFocus(object sender, EventArgs e)
-        {
-            UpdateNumSplinePoints();
-        }
+ 
 
         private void topDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
@@ -652,9 +658,8 @@ namespace NL2SplineTrackExtractor
 
         #endregion
 
-        private void UpdateNumSplinePoints()
+        private void UpdateNumSplinePoints(int num)
         {
-            int num = getNumPointsPerSpline();
             numSplinePointsLabel.Text = num >= 0 ? num.ToString() : "N/A";
 
             nodesPerSplitSelector.Maximum = num;
