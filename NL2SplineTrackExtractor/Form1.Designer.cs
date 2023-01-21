@@ -86,6 +86,7 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.splinePlotter = new NL2SplineTrackExtractor.SplinePlotter();
             this.label20 = new System.Windows.Forms.Label();
+            this.pieceLable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nodesPerSplitSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.piecesSelector)).BeginInit();
             this.panel1.SuspendLayout();
@@ -304,6 +305,7 @@
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.pieceLable);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.splitTypeSelector);
             this.panel1.Controls.Add(this.xLabel);
@@ -440,7 +442,7 @@
             // 
             // rightDistanceTextBox
             // 
-            this.rightDistanceTextBox.Location = new System.Drawing.Point(175, 110);
+            this.rightDistanceTextBox.Location = new System.Drawing.Point(171, 110);
             this.rightDistanceTextBox.Name = "rightDistanceTextBox";
             this.rightDistanceTextBox.Size = new System.Drawing.Size(69, 22);
             this.rightDistanceTextBox.TabIndex = 13;
@@ -755,6 +757,16 @@
             this.label20.TabIndex = 11;
             this.label20.Text = "Cut Preview (TopDown):";
             // 
+            // pieceLable
+            // 
+            this.pieceLable.AutoSize = true;
+            this.pieceLable.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pieceLable.Location = new System.Drawing.Point(26, 68);
+            this.pieceLable.Name = "pieceLable";
+            this.pieceLable.Size = new System.Drawing.Size(55, 16);
+            this.pieceLable.TabIndex = 20;
+            this.pieceLable.Text = "Pieces: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -865,6 +877,7 @@
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label20;
         private SplinePlotter splinePlotter;
+        private System.Windows.Forms.Label pieceLable;
     }
 }
 

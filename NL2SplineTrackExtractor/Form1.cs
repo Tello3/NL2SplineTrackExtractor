@@ -64,19 +64,27 @@ namespace NL2SplineTrackExtractor
             none = 0,
             nodes = 1,
             pieces = 2,
+            custom = 3,
         }
         public Form1()
         {
             InitializeComponent();
             
-            splitTypeSelector.Items.AddRange(new string[] { "Dont't split", "Split after x nodes", "Split into x pieces" });
+            splitTypeSelector.Items.AddRange(new string[] { "Dont't split", "Split after x nodes", "Split into x pieces", "Custom" });
             splitTypeSelector.SelectedIndex = 0;
             nodesPerSplitSelector.Minimum = 1;
             piecesSelector.Minimum = 1;
+            splinePlotter.CutChanged += OnCustomCut;
 
             //make sure no textbox is focused
             this.ActiveControl = inputPathChangeBtn;
             findSplitPoints();
+        }
+
+        private void OnCustomCut(object sender, int pieces)
+        {
+            splitTypeSelector.SelectedIndex = ((int)SplitTypes.custom);
+            pieceLable.Text = "Pieces: " + pieces;
         }
 
         private void calculateSplines()
@@ -142,6 +150,7 @@ namespace NL2SplineTrackExtractor
             }
             try
             {
+                splitTypeSelector.SelectedIndex = ((int)SplitTypes.none);
                 IEnumerable<string> lines = File.ReadLines(inputFilePath);
                 position = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
                 left = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
@@ -157,6 +166,7 @@ namespace NL2SplineTrackExtractor
 
                 splinePlotter.setSplinePoints(position);
                 findSplitPoints();
+                splinePlotter.setSplitPoints(splitPoints);
             }
             catch (IOException e)
             {
@@ -418,6 +428,7 @@ namespace NL2SplineTrackExtractor
 
             splitPoints = new List<int>();
             splitPoints.Add(0);
+            splitPoints.Add(position[0].Count - 1);
 
             switch (splitType)
             {
@@ -436,8 +447,11 @@ namespace NL2SplineTrackExtractor
                         findSplitPointsForDistance((int)Math.Ceiling(position[0].Count / (double)numPieces));
                     }
                     break;
+                default: splitPoints = splinePlotter.getSplitPoints();
+                    break;
             }
-            splitPoints.Add(position[0].Count-1);
+
+            splitPoints.Sort();
             splinePlotter.setSplitPoints(splitPoints);
         }
         private void findSplitPointsForDistance(int nodesPerSplit)
@@ -521,6 +535,7 @@ namespace NL2SplineTrackExtractor
                         xLabel.Visible = false;
                         nodesPerSplitSelector.Visible = false;
                         piecesSelector.Visible = false;
+                        pieceLable.Visible = false;
                     }
                     break;
                 case SplitTypes.nodes:
@@ -528,6 +543,7 @@ namespace NL2SplineTrackExtractor
                         xLabel.Visible = true;
                         nodesPerSplitSelector.Visible = true;
                         piecesSelector.Visible = false;
+                        pieceLable.Visible = false;
                     }
                     break;
                 case SplitTypes.pieces:
@@ -535,6 +551,15 @@ namespace NL2SplineTrackExtractor
                         xLabel.Visible = true;
                         nodesPerSplitSelector.Visible = false;
                         piecesSelector.Visible = true;
+                        pieceLable.Visible = false;
+                    }
+                    break;
+                case SplitTypes.custom:
+                    {
+                        xLabel.Visible = false;
+                        nodesPerSplitSelector.Visible = false;
+                        piecesSelector.Visible = false;
+                        pieceLable.Visible = true;
                     }
                     break;
             }
