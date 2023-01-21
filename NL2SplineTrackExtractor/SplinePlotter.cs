@@ -34,10 +34,17 @@ namespace NL2SplineTrackExtractor
             DoubleBuffered = true;
             InitializeComponent();
             this.MouseDown += OnMousePressed;
+            this.MouseClick += OnMouseClicked;
             this.MouseUp += OnMouseReleased;
             this.MouseMove += OnMouseMoved;
             this.MouseWheel += OnZoom;
             this.Paint += DoPaint;
+        }
+
+        private void OnMouseClicked(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Middle)
+                AutoScale();
         }
 
         private void DoPaint(object sender, PaintEventArgs e)
@@ -93,6 +100,44 @@ namespace NL2SplineTrackExtractor
             }
         }
 
+        private void AutoScale()
+        {
+            if (splinePoints == null) return;
+            findDelta(splinePoints[((int)Form1.Axis.x)], out float xDelta, out float xOffset);
+            float xScale = (float)Math.Log((Width)/ (xDelta));
+            findDelta(splinePoints[((int)Form1.Axis.z)], out float yDelta, out float yOffset);
+            float yScale = (float)Math.Log((Height)/(yDelta));
+
+            scale = Math.Min(yScale, xScale);
+
+            offset.X = xOffset+ (-xOffset)*(float)Math.Exp(scale)+Width/2;
+            offset.Y = yOffset+ (-yOffset) * (float)Math.Exp(scale) + Height/ 2;
+            renderSpline();
+
+        }
+
+        private void findDelta(List<float> values, out float delta, out float offset)
+        {
+            float max = float.MinValue;
+            foreach(float value in values)
+            {
+                if (value > max)
+                {
+                    max = value;
+                }
+            }
+            float min = float.MaxValue;
+            foreach (float value in values)
+            {
+                if (value < min)
+                {
+                    min = value;
+                }
+            }
+            delta = Math.Abs(max - min);
+            offset = max + min;
+        }
+
         private void OnZoom(object sender, MouseEventArgs e)
         {
             adjustZoom(e.Delta, e.Location);
@@ -146,6 +191,7 @@ namespace NL2SplineTrackExtractor
         {
             this.splinePoints = splinePoints;
             initializeSplitPoints();
+            AutoScale();
             renderSpline();
         }
 

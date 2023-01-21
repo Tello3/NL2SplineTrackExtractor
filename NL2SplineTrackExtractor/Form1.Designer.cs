@@ -252,7 +252,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(71, 16);
             this.label4.TabIndex = 16;
-            this.label4.Text = "Split Type;";
+            this.label4.Text = "Split Type:";
             // 
             // nodesPerSplitSelector
             // 
@@ -514,9 +514,9 @@
             this.label8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label8.Location = new System.Drawing.Point(3, 6);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(146, 16);
+            this.label8.Size = new System.Drawing.Size(149, 16);
             this.label8.TabIndex = 19;
-            this.label8.Text = "Rotation (around origin)";
+            this.label8.Text = "Rotation (around origin):";
             // 
             // label14
             // 
@@ -606,7 +606,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 16);
             this.label6.TabIndex = 17;
-            this.label6.Text = "Scale;";
+            this.label6.Text = "Scale:";
             // 
             // panel6
             // 
@@ -722,9 +722,9 @@
             this.label9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label9.Location = new System.Drawing.Point(3, 6);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(174, 16);
+            this.label9.Size = new System.Drawing.Size(177, 16);
             this.label9.TabIndex = 19;
-            this.label9.Text = "Offset (applied after rotation)";
+            this.label9.Text = "Offset (applied after rotation):";
             // 
             // panel8
             // 
@@ -751,9 +751,9 @@
             this.label20.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.label20.Location = new System.Drawing.Point(3, 4);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(80, 16);
+            this.label20.Size = new System.Drawing.Size(150, 16);
             this.label20.TabIndex = 11;
-            this.label20.Text = "Cut Preview:";
+            this.label20.Text = "Cut Preview (TopDown):";
             // 
             // Form1
             // 
