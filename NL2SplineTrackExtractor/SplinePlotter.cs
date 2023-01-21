@@ -20,20 +20,20 @@ namespace NL2SplineTrackExtractor
 
         private List<float>[] splinePoints;
         private List<int> splitPoints;
+        private bool roundTrip;
 
+        //used to distinguish between long and short mouseclicks
         Stopwatch leftButtonStopwatch = new Stopwatch();
         Stopwatch rightButtonStopwatch = new Stopwatch();
 
-
-
         private bool isLeftMouseDown = false;
         private Point lastMouseDragPosition = Point.Empty;
+
         private Point mousePosHover = Point.Empty;
+        
         private PointF offset = Point.Empty;
         private float scale = 1;
         private const float zoomSensitivity = 0.001f;
-
-        private bool roundTrip;
 
         public delegate void CutChangedEventHandler(object sender, int pieces);
         public event CutChangedEventHandler CutChanged;
@@ -49,6 +49,7 @@ namespace NL2SplineTrackExtractor
             this.Paint += DoPaint;
         }
 
+        #region Cutting
         private void AddPointAt(Point location)
         {
             int node = mousePositionToNode(location);
@@ -95,6 +96,148 @@ namespace NL2SplineTrackExtractor
             }
         }
 
+        #endregion
+
+        #region MouseInteraction
+        private int mousePositionToNode(PointF mousePos)
+        {
+            if (splinePoints == null) return -1;
+            float minDistance = float.MaxValue;
+            int nearestNodeIndex = -1;
+            for(int i = 0; i < splinePoints[0].Count; i++)
+            {
+                float distance = getDistanceToMouse(i, mousePos);
+                if(distance < minDistance)
+                {
+                    nearestNodeIndex = i;
+                    minDistance = distance;
+                }
+            }
+            if (minDistance > 30) return -1;
+            return nearestNodeIndex;
+        }
+
+        public float getDistanceToMouse(int node, PointF mousePos)
+        {
+            if (node > splinePoints[0].Count) return float.MaxValue;
+            float xDist = (splinePoints[((int)Form1.Axis.x)][node] * (float)Math.Exp(scale) + offset.X) - mousePos.X;
+            float yDist = (splinePoints[((int)Form1.Axis.z)][node] * (float)Math.Exp(scale) + offset.Y) - mousePos.Y;
+            return (float)Math.Sqrt(yDist * yDist + xDist * xDist);
+        }
+
+        private void OnMouseMoved(object sender, MouseEventArgs e)
+        {
+            mousePosHover = e.Location;
+            if (isLeftMouseDown)
+            {
+
+                movePlot(lastMouseDragPosition, e.Location);
+
+                lastMouseDragPosition = e.Location;
+            }
+            renderSpline();
+        }
+        private void OnMousePressed(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isLeftMouseDown = true;
+                lastMouseDragPosition = e.Location;
+                leftButtonStopwatch.Restart();
+            }
+            if(e.Button == MouseButtons.Right)
+            {
+                leftButtonStopwatch.Restart();
+            }
+            if (e.Button == MouseButtons.Middle)
+                AutoScale();
+        }
+        private void OnMouseReleased(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isLeftMouseDown = false;
+                if (leftButtonStopwatch.ElapsedMilliseconds < 200)
+                {
+                    AddPointAt(e.Location);
+                    leftButtonStopwatch.Reset();
+                }
+            }
+            if (e.Button == MouseButtons.Right && rightButtonStopwatch.ElapsedMilliseconds < 200)
+            {
+                RemovePointAt(e.Location);
+                rightButtonStopwatch.Reset();
+            }
+        }
+        #endregion
+
+        #region Data
+        public void setSplinePoints(List<float>[] splinePoints)
+        {
+            this.splinePoints = splinePoints;
+            initializeSplitPoints();
+            AutoScale();
+            renderSpline();
+        }
+        public void setRoundTrip(bool flag)
+        {
+            roundTrip = flag;
+            renderSpline();
+        }
+        private void initializeSplitPoints()
+        {
+            splitPoints = new List<int>() { 0, splinePoints.Length};
+        }
+        public void setSplitPoints(List<int> splitPoints)
+        {
+            this.splitPoints = new List<int>(splitPoints);
+            renderSpline();
+        }
+        public List<int> getSplitPoints()
+        {
+            int[] copy = new int[splitPoints.Count];
+            splitPoints.CopyTo(copy);
+            return copy.ToList();
+        }
+        #endregion
+
+        #region Viewport
+        private void AutoScale()
+        {
+            if (splinePoints == null) return;
+            findDelta(splinePoints[((int)Form1.Axis.x)], out float xDelta, out float xOffset);
+            float xScale = (float)Math.Log((Width)/ (xDelta));
+            findDelta(splinePoints[((int)Form1.Axis.z)], out float yDelta, out float yOffset);
+            float yScale = (float)Math.Log((Height)/(yDelta));
+
+            scale = Math.Min(yScale, xScale);
+
+            offset.X = xOffset+ (-xOffset)*(float)Math.Exp(scale)+Width/2;
+            offset.Y = yOffset+ (-yOffset) * (float)Math.Exp(scale) + Height/ 2;
+            renderSpline();
+
+        }
+        private void findDelta(List<float> values, out float delta, out float offset)
+        {
+            float max = float.MinValue;
+            foreach(float value in values)
+            {
+                if (value > max)
+                {
+                    max = value;
+                }
+            }
+            float min = float.MaxValue;
+            foreach (float value in values)
+            {
+                if (value < min)
+                {
+                    min = value;
+                }
+            }
+            delta = Math.Abs(max - min);
+            offset = max + min;
+        }
         private void DoPaint(object sender, PaintEventArgs e)
         {
             if (splinePoints == null || splitPoints == null) return;
@@ -151,75 +294,21 @@ namespace NL2SplineTrackExtractor
                 else currentPen = p1;
             }
         }
-        private int mousePositionToNode(PointF mousePos)
+        private void movePlot(Point oldPoint, Point newPoint)
         {
-            if (splinePoints == null) return -1;
-            float minDistance = float.MaxValue;
-            int nearestNodeIndex = -1;
-            for(int i = 0; i < splinePoints[0].Count; i++)
-            {
-                float distance = getDistanceToMouse(i, mousePos);
-                if(distance < minDistance)
-                {
-                    nearestNodeIndex = i;
-                    minDistance = distance;
-                }
-            }
-            if (minDistance > 30) return -1;
-            return nearestNodeIndex;
-        }
+            offset.X += newPoint.X - oldPoint.X;
+            offset.Y += newPoint.Y - oldPoint.Y;
 
-        public float getDistanceToMouse(int node, PointF mousePos)
-        {
-            if (node > splinePoints[0].Count) return float.MaxValue;
-            float xDist = (splinePoints[((int)Form1.Axis.x)][node] * (float)Math.Exp(scale) + offset.X) - mousePos.X;
-            float yDist = (splinePoints[((int)Form1.Axis.z)][node] * (float)Math.Exp(scale) + offset.Y) - mousePos.Y;
-            return (float)Math.Sqrt(yDist * yDist + xDist * xDist);
-        }
-
-        private void AutoScale()
-        {
-            if (splinePoints == null) return;
-            findDelta(splinePoints[((int)Form1.Axis.x)], out float xDelta, out float xOffset);
-            float xScale = (float)Math.Log((Width)/ (xDelta));
-            findDelta(splinePoints[((int)Form1.Axis.z)], out float yDelta, out float yOffset);
-            float yScale = (float)Math.Log((Height)/(yDelta));
-
-            scale = Math.Min(yScale, xScale);
-
-            offset.X = xOffset+ (-xOffset)*(float)Math.Exp(scale)+Width/2;
-            offset.Y = yOffset+ (-yOffset) * (float)Math.Exp(scale) + Height/ 2;
             renderSpline();
-
         }
-
-        private void findDelta(List<float> values, out float delta, out float offset)
+        private void renderSpline()
         {
-            float max = float.MinValue;
-            foreach(float value in values)
-            {
-                if (value > max)
-                {
-                    max = value;
-                }
-            }
-            float min = float.MaxValue;
-            foreach (float value in values)
-            {
-                if (value < min)
-                {
-                    min = value;
-                }
-            }
-            delta = Math.Abs(max - min);
-            offset = max + min;
+            Invalidate();
         }
-
         private void OnZoom(object sender, MouseEventArgs e)
         {
             adjustZoom(e.Delta, e.Location);
         }
-
         private void adjustZoom(int delta, Point mousePosition)
         {
             if (Math.Exp(scale + zoomSensitivity * delta) > 0) //Exp makes a more linear zoom
@@ -233,96 +322,7 @@ namespace NL2SplineTrackExtractor
                 renderSpline();
             }
         }
+        #endregion
 
-        private void OnMouseMoved(object sender, MouseEventArgs e)
-        {
-            mousePosHover = e.Location;
-            if (isLeftMouseDown)
-            {
-
-                movePlot(lastMouseDragPosition, e.Location);
-
-                lastMouseDragPosition = e.Location;
-            }
-            renderSpline();
-        }
-
-        private void movePlot(Point oldPoint, Point newPoint)
-        {
-            offset.X += newPoint.X - oldPoint.X;
-            offset.Y += newPoint.Y - oldPoint.Y;
-
-            renderSpline();
-        }
-
-        private void OnMousePressed(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                isLeftMouseDown = true;
-                lastMouseDragPosition = e.Location;
-                leftButtonStopwatch.Restart();
-            }
-            if(e.Button == MouseButtons.Right)
-            {
-                leftButtonStopwatch.Restart();
-            }
-            if (e.Button == MouseButtons.Middle)
-                AutoScale();
-        }
-
-        private void OnMouseReleased(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                isLeftMouseDown = false;
-                if (leftButtonStopwatch.ElapsedMilliseconds < 200)
-                {
-                    AddPointAt(e.Location);
-                    leftButtonStopwatch.Reset();
-                }
-            }
-            if (e.Button == MouseButtons.Right && rightButtonStopwatch.ElapsedMilliseconds < 200)
-            {
-                RemovePointAt(e.Location);
-                rightButtonStopwatch.Reset();
-            }
-        }
-
-        public void setSplinePoints(List<float>[] splinePoints)
-        {
-            this.splinePoints = splinePoints;
-            initializeSplitPoints();
-            AutoScale();
-            renderSpline();
-        }
-
-        public void setRoundTrip(bool flag)
-        {
-            roundTrip = flag;
-            renderSpline();
-        }
-
-        private void initializeSplitPoints()
-        {
-            splitPoints = new List<int>() { 0, splinePoints.Length};
-        }
-        public void setSplitPoints(List<int> splitPoints)
-        {
-            this.splitPoints = new List<int>(splitPoints);
-            renderSpline();
-        }
-
-        private void renderSpline()
-        {
-            Invalidate();
-        }
-
-        internal List<int> getSplitPoints()
-        {
-            int[] copy = new int[splitPoints.Count];
-            splitPoints.CopyTo(copy);
-            return copy.ToList();
-        }
     }
 }
