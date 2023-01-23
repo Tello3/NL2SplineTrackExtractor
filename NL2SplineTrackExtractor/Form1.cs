@@ -66,12 +66,15 @@ namespace NL2SplineTrackExtractor
             pieces = 2,
             custom = 3,
         }
+
         public Form1()
         {
             InitializeComponent();
             
             splitTypeSelector.Items.AddRange(new string[] { "Dont't split", "Split after x nodes", "Split into x pieces", "Custom" });
             splitTypeSelector.SelectedIndex = 0;
+            outputfileTypeSelector.Items.AddRange(new string[] { ".csv",".txt"});
+            outputfileTypeSelector.SelectedIndex = 0;
             nodesPerSplitSelector.Minimum = 1;
             piecesSelector.Minimum = 1;
             splinePlotter.CutChanged += OnCustomCut;
@@ -261,7 +264,7 @@ namespace NL2SplineTrackExtractor
                 lines += newY.ToString(usFormat) + ",";
                 lines += newZ.ToString(usFormat);
             }
-            File.WriteAllText(savePath+"\\Right.csv", lines);
+            File.WriteAllText(savePath + "\\Right" + outputfileTypeSelector.Text, lines);
         }
 
         private void extractCenter(int from, int to, string savePath, bool last)
@@ -289,7 +292,7 @@ namespace NL2SplineTrackExtractor
                 lines += newY.ToString(usFormat) + ",";
                 lines += newZ.ToString(usFormat);
             }
-            File.WriteAllText(savePath + "\\Center.csv", lines);
+            File.WriteAllText(savePath + "\\Center" + outputfileTypeSelector.Text, lines);
         }
 
         private void extractLeft(int from, int to, string savePath, bool last)
@@ -317,7 +320,7 @@ namespace NL2SplineTrackExtractor
                 lines += newY.ToString(usFormat) + ",";
                 lines += newZ.ToString(usFormat);
             }
-            File.WriteAllText(savePath + "\\Left.csv", lines);
+            File.WriteAllText(savePath + "\\Left" + outputfileTypeSelector.Text, lines);
         }
 
         private void extractTop(int from, int to, string savePath, bool last)
@@ -345,7 +348,7 @@ namespace NL2SplineTrackExtractor
                 lines += newY.ToString(usFormat) + ",";
                 lines += newZ.ToString(usFormat);
             }
-            File.WriteAllText(savePath + "\\Top.csv", lines);
+            File.WriteAllText(savePath + "\\Top" + outputfileTypeSelector.Text, lines);
         }
 
         private void extractBottom(int from, int to, string savePath, bool last)
@@ -373,7 +376,7 @@ namespace NL2SplineTrackExtractor
                 lines += newY.ToString(usFormat) + ",";
                 lines += newZ.ToString(usFormat);
             }
-            File.WriteAllText(savePath + "\\Bottom.csv", lines);
+            File.WriteAllText(savePath + "\\Bottom" + outputfileTypeSelector.Text, lines);
         }
 
         private void rotateAndOffset(float x, float y, float z, out float newX, out float newY, out float newZ)

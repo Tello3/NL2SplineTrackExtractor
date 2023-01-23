@@ -47,7 +47,10 @@
             this.xLabel = new System.Windows.Forms.Label();
             this.piecesSelector = new System.Windows.Forms.NumericUpDown();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pieceLable = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.label21 = new System.Windows.Forms.Label();
+            this.outputfileTypeSelector = new System.Windows.Forms.ComboBox();
             this.roundTripChkbx = new System.Windows.Forms.CheckBox();
             this.numSplinePointsLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -86,7 +89,6 @@
             this.panel8 = new System.Windows.Forms.Panel();
             this.splinePlotter = new NL2SplineTrackExtractor.SplinePlotter();
             this.label20 = new System.Windows.Forms.Label();
-            this.pieceLable = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.nodesPerSplitSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.piecesSelector)).BeginInit();
             this.panel1.SuspendLayout();
@@ -101,9 +103,10 @@
             // 
             // inputPathTextBox
             // 
-            this.inputPathTextBox.Location = new System.Drawing.Point(17, 27);
+            this.inputPathTextBox.Location = new System.Drawing.Point(13, 22);
+            this.inputPathTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.inputPathTextBox.Name = "inputPathTextBox";
-            this.inputPathTextBox.Size = new System.Drawing.Size(396, 22);
+            this.inputPathTextBox.Size = new System.Drawing.Size(298, 20);
             this.inputPathTextBox.TabIndex = 0;
             this.inputPathTextBox.Text = "Select path...";
             this.inputPathTextBox.TextChanged += new System.EventHandler(this.inputPathTextBox_TextChanged);
@@ -111,9 +114,10 @@
             // 
             // inputPathChangeBtn
             // 
-            this.inputPathChangeBtn.Location = new System.Drawing.Point(420, 25);
+            this.inputPathChangeBtn.Location = new System.Drawing.Point(315, 20);
+            this.inputPathChangeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.inputPathChangeBtn.Name = "inputPathChangeBtn";
-            this.inputPathChangeBtn.Size = new System.Drawing.Size(75, 24);
+            this.inputPathChangeBtn.Size = new System.Drawing.Size(56, 20);
             this.inputPathChangeBtn.TabIndex = 1;
             this.inputPathChangeBtn.Text = "Browse";
             this.inputPathChangeBtn.UseVisualStyleBackColor = true;
@@ -122,9 +126,10 @@
             // caluclateBtn
             // 
             this.caluclateBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.caluclateBtn.Location = new System.Drawing.Point(12, 289);
+            this.caluclateBtn.Location = new System.Drawing.Point(9, 275);
+            this.caluclateBtn.Margin = new System.Windows.Forms.Padding(2);
             this.caluclateBtn.Name = "caluclateBtn";
-            this.caluclateBtn.Size = new System.Drawing.Size(89, 101);
+            this.caluclateBtn.Size = new System.Drawing.Size(67, 82);
             this.caluclateBtn.TabIndex = 3;
             this.caluclateBtn.Text = "Calculate";
             this.caluclateBtn.UseVisualStyleBackColor = true;
@@ -134,9 +139,10 @@
             // 
             this.leftChkbx.AutoSize = true;
             this.leftChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.leftChkbx.Location = new System.Drawing.Point(530, 96);
+            this.leftChkbx.Location = new System.Drawing.Point(398, 78);
+            this.leftChkbx.Margin = new System.Windows.Forms.Padding(2);
             this.leftChkbx.Name = "leftChkbx";
-            this.leftChkbx.Size = new System.Drawing.Size(50, 20);
+            this.leftChkbx.Size = new System.Drawing.Size(44, 17);
             this.leftChkbx.TabIndex = 4;
             this.leftChkbx.Text = "Left";
             this.leftChkbx.UseVisualStyleBackColor = false;
@@ -145,9 +151,10 @@
             // 
             this.topChkbx.AutoSize = true;
             this.topChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.topChkbx.Location = new System.Drawing.Point(600, 42);
+            this.topChkbx.Location = new System.Drawing.Point(450, 34);
+            this.topChkbx.Margin = new System.Windows.Forms.Padding(2);
             this.topChkbx.Name = "topChkbx";
-            this.topChkbx.Size = new System.Drawing.Size(54, 20);
+            this.topChkbx.Size = new System.Drawing.Size(45, 17);
             this.topChkbx.TabIndex = 5;
             this.topChkbx.Text = "Top";
             this.topChkbx.UseVisualStyleBackColor = false;
@@ -156,9 +163,10 @@
             // 
             this.rightChkbx.AutoSize = true;
             this.rightChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.rightChkbx.Location = new System.Drawing.Point(677, 94);
+            this.rightChkbx.Location = new System.Drawing.Point(508, 76);
+            this.rightChkbx.Margin = new System.Windows.Forms.Padding(2);
             this.rightChkbx.Name = "rightChkbx";
-            this.rightChkbx.Size = new System.Drawing.Size(60, 20);
+            this.rightChkbx.Size = new System.Drawing.Size(51, 17);
             this.rightChkbx.TabIndex = 6;
             this.rightChkbx.Text = "Right";
             this.rightChkbx.UseVisualStyleBackColor = false;
@@ -167,9 +175,10 @@
             // 
             this.bottomChkbx.AutoSize = true;
             this.bottomChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.bottomChkbx.Location = new System.Drawing.Point(600, 147);
+            this.bottomChkbx.Location = new System.Drawing.Point(450, 119);
+            this.bottomChkbx.Margin = new System.Windows.Forms.Padding(2);
             this.bottomChkbx.Name = "bottomChkbx";
-            this.bottomChkbx.Size = new System.Drawing.Size(71, 20);
+            this.bottomChkbx.Size = new System.Drawing.Size(59, 17);
             this.bottomChkbx.TabIndex = 7;
             this.bottomChkbx.Text = "Bottom";
             this.bottomChkbx.UseVisualStyleBackColor = false;
@@ -178,9 +187,10 @@
             // 
             this.centerChkbx.AutoSize = true;
             this.centerChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.centerChkbx.Location = new System.Drawing.Point(600, 96);
+            this.centerChkbx.Location = new System.Drawing.Point(450, 78);
+            this.centerChkbx.Margin = new System.Windows.Forms.Padding(2);
             this.centerChkbx.Name = "centerChkbx";
-            this.centerChkbx.Size = new System.Drawing.Size(68, 20);
+            this.centerChkbx.Size = new System.Drawing.Size(57, 17);
             this.centerChkbx.TabIndex = 8;
             this.centerChkbx.Text = "Center";
             this.centerChkbx.UseVisualStyleBackColor = false;
@@ -189,9 +199,10 @@
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label1.Location = new System.Drawing.Point(14, 9);
+            this.label1.Location = new System.Drawing.Point(10, 7);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 16);
+            this.label1.Size = new System.Drawing.Size(74, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Input file path:";
             // 
@@ -199,9 +210,10 @@
             // 
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label2.Location = new System.Drawing.Point(3, 4);
+            this.label2.Location = new System.Drawing.Point(2, 3);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(111, 16);
+            this.label2.Size = new System.Drawing.Size(91, 13);
             this.label2.TabIndex = 10;
             this.label2.Text = "Splines to extract:";
             // 
@@ -209,17 +221,19 @@
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label3.Location = new System.Drawing.Point(14, 52);
+            this.label3.Location = new System.Drawing.Point(10, 42);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(114, 16);
+            this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 14;
             this.label3.Text = "Output folder path:";
             // 
             // outputPathChangeBtn
             // 
-            this.outputPathChangeBtn.Location = new System.Drawing.Point(420, 68);
+            this.outputPathChangeBtn.Location = new System.Drawing.Point(315, 55);
+            this.outputPathChangeBtn.Margin = new System.Windows.Forms.Padding(2);
             this.outputPathChangeBtn.Name = "outputPathChangeBtn";
-            this.outputPathChangeBtn.Size = new System.Drawing.Size(75, 24);
+            this.outputPathChangeBtn.Size = new System.Drawing.Size(56, 20);
             this.outputPathChangeBtn.TabIndex = 13;
             this.outputPathChangeBtn.Text = "Browse";
             this.outputPathChangeBtn.UseVisualStyleBackColor = true;
@@ -227,9 +241,10 @@
             // 
             // outputPathTextbox
             // 
-            this.outputPathTextbox.Location = new System.Drawing.Point(17, 70);
+            this.outputPathTextbox.Location = new System.Drawing.Point(13, 57);
+            this.outputPathTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.outputPathTextbox.Name = "outputPathTextbox";
-            this.outputPathTextbox.Size = new System.Drawing.Size(396, 22);
+            this.outputPathTextbox.Size = new System.Drawing.Size(298, 20);
             this.outputPathTextbox.TabIndex = 12;
             this.outputPathTextbox.Text = "Select path...";
             this.outputPathTextbox.TextChanged += new System.EventHandler(this.outputPathTextbox_TextChanged);
@@ -239,9 +254,10 @@
             // 
             this.splitTypeSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.splitTypeSelector.FormattingEnabled = true;
-            this.splitTypeSelector.Location = new System.Drawing.Point(5, 27);
+            this.splitTypeSelector.Location = new System.Drawing.Point(4, 22);
+            this.splitTypeSelector.Margin = new System.Windows.Forms.Padding(2);
             this.splitTypeSelector.Name = "splitTypeSelector";
-            this.splitTypeSelector.Size = new System.Drawing.Size(153, 24);
+            this.splitTypeSelector.Size = new System.Drawing.Size(116, 21);
             this.splitTypeSelector.TabIndex = 15;
             this.splitTypeSelector.SelectedIndexChanged += new System.EventHandler(this.splitTypeSelector_SelectedIndexChanged);
             // 
@@ -249,22 +265,24 @@
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label4.Location = new System.Drawing.Point(2, 6);
+            this.label4.Location = new System.Drawing.Point(2, 5);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(71, 16);
+            this.label4.Size = new System.Drawing.Size(57, 13);
             this.label4.TabIndex = 16;
             this.label4.Text = "Split Type:";
             // 
             // nodesPerSplitSelector
             // 
-            this.nodesPerSplitSelector.Location = new System.Drawing.Point(38, 65);
+            this.nodesPerSplitSelector.Location = new System.Drawing.Point(28, 53);
+            this.nodesPerSplitSelector.Margin = new System.Windows.Forms.Padding(2);
             this.nodesPerSplitSelector.Minimum = new decimal(new int[] {
             2,
             0,
             0,
             0});
             this.nodesPerSplitSelector.Name = "nodesPerSplitSelector";
-            this.nodesPerSplitSelector.Size = new System.Drawing.Size(120, 22);
+            this.nodesPerSplitSelector.Size = new System.Drawing.Size(90, 20);
             this.nodesPerSplitSelector.TabIndex = 17;
             this.nodesPerSplitSelector.Value = new decimal(new int[] {
             2,
@@ -277,22 +295,24 @@
             // 
             this.xLabel.AutoSize = true;
             this.xLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.xLabel.Location = new System.Drawing.Point(16, 68);
+            this.xLabel.Location = new System.Drawing.Point(12, 55);
+            this.xLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.xLabel.Name = "xLabel";
-            this.xLabel.Size = new System.Drawing.Size(16, 16);
+            this.xLabel.Size = new System.Drawing.Size(15, 13);
             this.xLabel.TabIndex = 18;
             this.xLabel.Text = "x:";
             // 
             // piecesSelector
             // 
-            this.piecesSelector.Location = new System.Drawing.Point(38, 65);
+            this.piecesSelector.Location = new System.Drawing.Point(28, 53);
+            this.piecesSelector.Margin = new System.Windows.Forms.Padding(2);
             this.piecesSelector.Minimum = new decimal(new int[] {
             2,
             0,
             0,
             0});
             this.piecesSelector.Name = "piecesSelector";
-            this.piecesSelector.Size = new System.Drawing.Size(120, 22);
+            this.piecesSelector.Size = new System.Drawing.Size(90, 20);
             this.piecesSelector.TabIndex = 19;
             this.piecesSelector.Value = new decimal(new int[] {
             2,
@@ -311,30 +331,66 @@
             this.panel1.Controls.Add(this.xLabel);
             this.panel1.Controls.Add(this.nodesPerSplitSelector);
             this.panel1.Controls.Add(this.piecesSelector);
-            this.panel1.Location = new System.Drawing.Point(107, 289);
+            this.panel1.Location = new System.Drawing.Point(80, 274);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(161, 101);
+            this.panel1.Size = new System.Drawing.Size(121, 82);
             this.panel1.TabIndex = 20;
+            // 
+            // pieceLable
+            // 
+            this.pieceLable.AutoSize = true;
+            this.pieceLable.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pieceLable.Location = new System.Drawing.Point(20, 55);
+            this.pieceLable.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.pieceLable.Name = "pieceLable";
+            this.pieceLable.Size = new System.Drawing.Size(45, 13);
+            this.pieceLable.TabIndex = 20;
+            this.pieceLable.Text = "Pieces: ";
             // 
             // panel2
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.label21);
+            this.panel2.Controls.Add(this.outputfileTypeSelector);
             this.panel2.Controls.Add(this.roundTripChkbx);
             this.panel2.Controls.Add(this.numSplinePointsLabel);
             this.panel2.Controls.Add(this.label7);
-            this.panel2.Location = new System.Drawing.Point(12, 5);
+            this.panel2.Location = new System.Drawing.Point(9, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(487, 142);
+            this.panel2.Size = new System.Drawing.Size(366, 155);
             this.panel2.TabIndex = 21;
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label21.Location = new System.Drawing.Point(158, 88);
+            this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(78, 13);
+            this.label21.TabIndex = 26;
+            this.label21.Text = "Output filetype:";
+            // 
+            // outputfileTypeSelector
+            // 
+            this.outputfileTypeSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.outputfileTypeSelector.FormattingEnabled = true;
+            this.outputfileTypeSelector.Location = new System.Drawing.Point(196, 110);
+            this.outputfileTypeSelector.Name = "outputfileTypeSelector";
+            this.outputfileTypeSelector.Size = new System.Drawing.Size(124, 23);
+            this.outputfileTypeSelector.TabIndex = 25;
             // 
             // roundTripChkbx
             // 
             this.roundTripChkbx.AutoSize = true;
             this.roundTripChkbx.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.roundTripChkbx.Location = new System.Drawing.Point(321, 104);
+            this.roundTripChkbx.Location = new System.Drawing.Point(12, 114);
+            this.roundTripChkbx.Margin = new System.Windows.Forms.Padding(2);
             this.roundTripChkbx.Name = "roundTripChkbx";
-            this.roundTripChkbx.Size = new System.Drawing.Size(146, 20);
+            this.roundTripChkbx.Size = new System.Drawing.Size(122, 17);
             this.roundTripChkbx.TabIndex = 24;
             this.roundTripChkbx.Text = "Connect end to start";
             this.roundTripChkbx.UseVisualStyleBackColor = false;
@@ -344,9 +400,10 @@
             // 
             this.numSplinePointsLabel.AutoSize = true;
             this.numSplinePointsLabel.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.numSplinePointsLabel.Location = new System.Drawing.Point(137, 105);
+            this.numSplinePointsLabel.Location = new System.Drawing.Point(83, 88);
+            this.numSplinePointsLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.numSplinePointsLabel.Name = "numSplinePointsLabel";
-            this.numSplinePointsLabel.Size = new System.Drawing.Size(30, 16);
+            this.numSplinePointsLabel.Size = new System.Drawing.Size(27, 13);
             this.numSplinePointsLabel.TabIndex = 18;
             this.numSplinePointsLabel.Text = "N/A";
             this.numSplinePointsLabel.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -355,9 +412,10 @@
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label7.Location = new System.Drawing.Point(12, 105);
+            this.label7.Location = new System.Drawing.Point(9, 85);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(87, 16);
+            this.label7.Size = new System.Drawing.Size(70, 13);
             this.label7.TabIndex = 17;
             this.label7.Text = "Spline points:";
             // 
@@ -366,9 +424,10 @@
             this.panel3.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel3.Controls.Add(this.label2);
-            this.panel3.Location = new System.Drawing.Point(505, 5);
+            this.panel3.Location = new System.Drawing.Point(379, 4);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(247, 187);
+            this.panel3.Size = new System.Drawing.Size(186, 155);
             this.panel3.TabIndex = 22;
             // 
             // panel4
@@ -384,18 +443,20 @@
             this.panel4.Controls.Add(this.topDistanceTextBox);
             this.panel4.Controls.Add(this.leftDistanceTextBox);
             this.panel4.Controls.Add(this.label5);
-            this.panel4.Location = new System.Drawing.Point(505, 198);
+            this.panel4.Location = new System.Drawing.Point(379, 163);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(247, 192);
+            this.panel4.Size = new System.Drawing.Size(186, 193);
             this.panel4.TabIndex = 23;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label19.Location = new System.Drawing.Point(172, 91);
+            this.label19.Location = new System.Drawing.Point(129, 74);
+            this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(38, 16);
+            this.label19.Size = new System.Drawing.Size(32, 13);
             this.label19.TabIndex = 34;
             this.label19.Text = "Right";
             // 
@@ -403,9 +464,10 @@
             // 
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label18.Location = new System.Drawing.Point(94, 137);
+            this.label18.Location = new System.Drawing.Point(70, 111);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(49, 16);
+            this.label18.Size = new System.Drawing.Size(40, 13);
             this.label18.TabIndex = 33;
             this.label18.Text = "Bottom";
             // 
@@ -413,9 +475,10 @@
             // 
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label17.Location = new System.Drawing.Point(12, 91);
+            this.label17.Location = new System.Drawing.Point(9, 74);
+            this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(28, 16);
+            this.label17.Size = new System.Drawing.Size(25, 13);
             this.label17.TabIndex = 32;
             this.label17.Text = "Left";
             // 
@@ -423,17 +486,19 @@
             // 
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label16.Location = new System.Drawing.Point(92, 37);
+            this.label16.Location = new System.Drawing.Point(69, 30);
+            this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(32, 16);
+            this.label16.Size = new System.Drawing.Size(26, 13);
             this.label16.TabIndex = 31;
             this.label16.Text = "Top";
             // 
             // bottomDistanceTextBox
             // 
-            this.bottomDistanceTextBox.Location = new System.Drawing.Point(94, 156);
+            this.bottomDistanceTextBox.Location = new System.Drawing.Point(70, 127);
+            this.bottomDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.bottomDistanceTextBox.Name = "bottomDistanceTextBox";
-            this.bottomDistanceTextBox.Size = new System.Drawing.Size(69, 22);
+            this.bottomDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.bottomDistanceTextBox.TabIndex = 14;
             this.bottomDistanceTextBox.Text = "10";
             this.bottomDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -442,9 +507,10 @@
             // 
             // rightDistanceTextBox
             // 
-            this.rightDistanceTextBox.Location = new System.Drawing.Point(171, 110);
+            this.rightDistanceTextBox.Location = new System.Drawing.Point(128, 89);
+            this.rightDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.rightDistanceTextBox.Name = "rightDistanceTextBox";
-            this.rightDistanceTextBox.Size = new System.Drawing.Size(69, 22);
+            this.rightDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.rightDistanceTextBox.TabIndex = 13;
             this.rightDistanceTextBox.Text = "10";
             this.rightDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -453,9 +519,10 @@
             // 
             // topDistanceTextBox
             // 
-            this.topDistanceTextBox.Location = new System.Drawing.Point(94, 56);
+            this.topDistanceTextBox.Location = new System.Drawing.Point(70, 46);
+            this.topDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.topDistanceTextBox.Name = "topDistanceTextBox";
-            this.topDistanceTextBox.Size = new System.Drawing.Size(69, 22);
+            this.topDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.topDistanceTextBox.TabIndex = 12;
             this.topDistanceTextBox.Text = "10";
             this.topDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -464,9 +531,10 @@
             // 
             // leftDistanceTextBox
             // 
-            this.leftDistanceTextBox.Location = new System.Drawing.Point(15, 110);
+            this.leftDistanceTextBox.Location = new System.Drawing.Point(11, 89);
+            this.leftDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftDistanceTextBox.Name = "leftDistanceTextBox";
-            this.leftDistanceTextBox.Size = new System.Drawing.Size(69, 22);
+            this.leftDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.leftDistanceTextBox.TabIndex = 11;
             this.leftDistanceTextBox.Text = "10";
             this.leftDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -477,9 +545,10 @@
             // 
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label5.Location = new System.Drawing.Point(3, 6);
+            this.label5.Location = new System.Drawing.Point(2, 5);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(119, 16);
+            this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 10;
             this.label5.Text = "Distance to Center:";
             // 
@@ -494,9 +563,10 @@
             this.panel5.Controls.Add(this.label15);
             this.panel5.Controls.Add(this.yRotationTextbox);
             this.panel5.Controls.Add(this.zRotationTextbox);
-            this.panel5.Location = new System.Drawing.Point(203, 153);
+            this.panel5.Location = new System.Drawing.Point(152, 163);
+            this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(296, 130);
+            this.panel5.Size = new System.Drawing.Size(222, 106);
             this.panel5.TabIndex = 21;
             this.panel5.Click += new System.EventHandler(this.panel5_Click);
             // 
@@ -504,9 +574,10 @@
             // 
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label13.Location = new System.Drawing.Point(42, 92);
+            this.label13.Location = new System.Drawing.Point(32, 75);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(109, 16);
+            this.label13.Size = new System.Drawing.Size(90, 13);
             this.label13.TabIndex = 30;
             this.label13.Text = "z Axis (NL2 Front)";
             // 
@@ -514,9 +585,10 @@
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label8.Location = new System.Drawing.Point(3, 6);
+            this.label8.Location = new System.Drawing.Point(2, 5);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(149, 16);
+            this.label8.Size = new System.Drawing.Size(120, 13);
             this.label8.TabIndex = 19;
             this.label8.Text = "Rotation (around origin):";
             // 
@@ -524,17 +596,19 @@
             // 
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label14.Location = new System.Drawing.Point(42, 64);
+            this.label14.Location = new System.Drawing.Point(32, 52);
+            this.label14.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(105, 16);
+            this.label14.Size = new System.Drawing.Size(85, 13);
             this.label14.TabIndex = 29;
             this.label14.Text = "y Axis (NL2 Top)";
             // 
             // xRotationTextbox
             // 
-            this.xRotationTextbox.Location = new System.Drawing.Point(173, 33);
+            this.xRotationTextbox.Location = new System.Drawing.Point(130, 27);
+            this.xRotationTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.xRotationTextbox.Name = "xRotationTextbox";
-            this.xRotationTextbox.Size = new System.Drawing.Size(69, 22);
+            this.xRotationTextbox.Size = new System.Drawing.Size(53, 20);
             this.xRotationTextbox.TabIndex = 25;
             this.xRotationTextbox.Text = "90";
             this.xRotationTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -546,17 +620,19 @@
             // 
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label15.Location = new System.Drawing.Point(42, 36);
+            this.label15.Location = new System.Drawing.Point(32, 29);
+            this.label15.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(100, 16);
+            this.label15.Size = new System.Drawing.Size(84, 13);
             this.label15.TabIndex = 28;
             this.label15.Text = "x Axis (NL2 Left)";
             // 
             // yRotationTextbox
             // 
-            this.yRotationTextbox.Location = new System.Drawing.Point(173, 61);
+            this.yRotationTextbox.Location = new System.Drawing.Point(130, 50);
+            this.yRotationTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.yRotationTextbox.Name = "yRotationTextbox";
-            this.yRotationTextbox.Size = new System.Drawing.Size(69, 22);
+            this.yRotationTextbox.Size = new System.Drawing.Size(53, 20);
             this.yRotationTextbox.TabIndex = 26;
             this.yRotationTextbox.Text = "0";
             this.yRotationTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -566,9 +642,10 @@
             // 
             // zRotationTextbox
             // 
-            this.zRotationTextbox.Location = new System.Drawing.Point(173, 89);
+            this.zRotationTextbox.Location = new System.Drawing.Point(130, 72);
+            this.zRotationTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.zRotationTextbox.Name = "zRotationTextbox";
-            this.zRotationTextbox.Size = new System.Drawing.Size(69, 22);
+            this.zRotationTextbox.Size = new System.Drawing.Size(53, 20);
             this.zRotationTextbox.TabIndex = 27;
             this.zRotationTextbox.Text = "0";
             this.zRotationTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -581,9 +658,10 @@
             this.affectDistancesCheckbox.AutoSize = true;
             this.affectDistancesCheckbox.Checked = true;
             this.affectDistancesCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.affectDistancesCheckbox.Location = new System.Drawing.Point(6, 44);
+            this.affectDistancesCheckbox.Location = new System.Drawing.Point(4, 36);
+            this.affectDistancesCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.affectDistancesCheckbox.Name = "affectDistancesCheckbox";
-            this.affectDistancesCheckbox.Size = new System.Drawing.Size(176, 20);
+            this.affectDistancesCheckbox.Size = new System.Drawing.Size(146, 17);
             this.affectDistancesCheckbox.TabIndex = 18;
             this.affectDistancesCheckbox.Text = "affect distances to center";
             this.affectDistancesCheckbox.UseVisualStyleBackColor = true;
@@ -591,9 +669,10 @@
             // 
             // scalingTextbox
             // 
-            this.scalingTextbox.Location = new System.Drawing.Point(82, 16);
+            this.scalingTextbox.Location = new System.Drawing.Point(62, 13);
+            this.scalingTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.scalingTextbox.Name = "scalingTextbox";
-            this.scalingTextbox.Size = new System.Drawing.Size(57, 22);
+            this.scalingTextbox.Size = new System.Drawing.Size(44, 20);
             this.scalingTextbox.TabIndex = 15;
             this.scalingTextbox.Text = "1";
             this.scalingTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -604,9 +683,10 @@
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label6.Location = new System.Drawing.Point(3, 6);
+            this.label6.Location = new System.Drawing.Point(2, 5);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 16);
+            this.label6.Size = new System.Drawing.Size(37, 13);
             this.label6.TabIndex = 17;
             this.label6.Text = "Scale:";
             // 
@@ -618,9 +698,10 @@
             this.panel6.Controls.Add(this.scalingTextbox);
             this.panel6.Controls.Add(this.affectDistancesCheckbox);
             this.panel6.Controls.Add(this.label6);
-            this.panel6.Location = new System.Drawing.Point(274, 289);
+            this.panel6.Location = new System.Drawing.Point(206, 274);
+            this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(225, 101);
+            this.panel6.Size = new System.Drawing.Size(169, 82);
             this.panel6.TabIndex = 22;
             // 
             // affectOffsetCheckbox
@@ -628,9 +709,10 @@
             this.affectOffsetCheckbox.AutoSize = true;
             this.affectOffsetCheckbox.Checked = true;
             this.affectOffsetCheckbox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.affectOffsetCheckbox.Location = new System.Drawing.Point(6, 67);
+            this.affectOffsetCheckbox.Location = new System.Drawing.Point(4, 54);
+            this.affectOffsetCheckbox.Margin = new System.Windows.Forms.Padding(2);
             this.affectOffsetCheckbox.Name = "affectOffsetCheckbox";
-            this.affectOffsetCheckbox.Size = new System.Drawing.Size(96, 20);
+            this.affectOffsetCheckbox.Size = new System.Drawing.Size(82, 17);
             this.affectOffsetCheckbox.TabIndex = 19;
             this.affectOffsetCheckbox.Text = "affect offset";
             this.affectOffsetCheckbox.UseVisualStyleBackColor = true;
@@ -647,18 +729,20 @@
             this.panel7.Controls.Add(this.yOffsetTextbox);
             this.panel7.Controls.Add(this.xOffsetTextbox);
             this.panel7.Controls.Add(this.label9);
-            this.panel7.Location = new System.Drawing.Point(12, 153);
+            this.panel7.Location = new System.Drawing.Point(9, 163);
+            this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(185, 130);
+            this.panel7.Size = new System.Drawing.Size(139, 106);
             this.panel7.TabIndex = 22;
             // 
             // label12
             // 
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label12.Location = new System.Drawing.Point(25, 95);
+            this.label12.Location = new System.Drawing.Point(19, 77);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(13, 16);
+            this.label12.Size = new System.Drawing.Size(12, 13);
             this.label12.TabIndex = 24;
             this.label12.Text = "z";
             // 
@@ -666,9 +750,10 @@
             // 
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label11.Location = new System.Drawing.Point(25, 64);
+            this.label11.Location = new System.Drawing.Point(19, 52);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(14, 16);
+            this.label11.Size = new System.Drawing.Size(12, 13);
             this.label11.TabIndex = 23;
             this.label11.Text = "y";
             // 
@@ -676,17 +761,19 @@
             // 
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label10.Location = new System.Drawing.Point(25, 33);
+            this.label10.Location = new System.Drawing.Point(19, 27);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(13, 16);
+            this.label10.Size = new System.Drawing.Size(12, 13);
             this.label10.TabIndex = 22;
             this.label10.Text = "x";
             // 
             // zOffsetTextbox
             // 
-            this.zOffsetTextbox.Location = new System.Drawing.Point(44, 89);
+            this.zOffsetTextbox.Location = new System.Drawing.Point(33, 72);
+            this.zOffsetTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.zOffsetTextbox.Name = "zOffsetTextbox";
-            this.zOffsetTextbox.Size = new System.Drawing.Size(114, 22);
+            this.zOffsetTextbox.Size = new System.Drawing.Size(86, 20);
             this.zOffsetTextbox.TabIndex = 21;
             this.zOffsetTextbox.Text = "0";
             this.zOffsetTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -696,9 +783,10 @@
             // 
             // yOffsetTextbox
             // 
-            this.yOffsetTextbox.Location = new System.Drawing.Point(44, 61);
+            this.yOffsetTextbox.Location = new System.Drawing.Point(33, 50);
+            this.yOffsetTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.yOffsetTextbox.Name = "yOffsetTextbox";
-            this.yOffsetTextbox.Size = new System.Drawing.Size(114, 22);
+            this.yOffsetTextbox.Size = new System.Drawing.Size(86, 20);
             this.yOffsetTextbox.TabIndex = 20;
             this.yOffsetTextbox.Text = "0";
             this.yOffsetTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -708,9 +796,10 @@
             // 
             // xOffsetTextbox
             // 
-            this.xOffsetTextbox.Location = new System.Drawing.Point(44, 33);
+            this.xOffsetTextbox.Location = new System.Drawing.Point(33, 27);
+            this.xOffsetTextbox.Margin = new System.Windows.Forms.Padding(2);
             this.xOffsetTextbox.Name = "xOffsetTextbox";
-            this.xOffsetTextbox.Size = new System.Drawing.Size(113, 22);
+            this.xOffsetTextbox.Size = new System.Drawing.Size(86, 20);
             this.xOffsetTextbox.TabIndex = 15;
             this.xOffsetTextbox.Text = "0";
             this.xOffsetTextbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
@@ -722,9 +811,10 @@
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label9.Location = new System.Drawing.Point(3, 6);
+            this.label9.Location = new System.Drawing.Point(2, 5);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(177, 16);
+            this.label9.Size = new System.Drawing.Size(143, 13);
             this.label9.TabIndex = 19;
             this.label9.Text = "Offset (applied after rotation):";
             // 
@@ -734,45 +824,37 @@
             this.panel8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel8.Controls.Add(this.splinePlotter);
             this.panel8.Controls.Add(this.label20);
-            this.panel8.Location = new System.Drawing.Point(758, 5);
+            this.panel8.Location = new System.Drawing.Point(568, 4);
+            this.panel8.Margin = new System.Windows.Forms.Padding(2);
             this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(595, 385);
+            this.panel8.Size = new System.Drawing.Size(447, 352);
             this.panel8.TabIndex = 24;
             // 
             // splinePlotter
             // 
             this.splinePlotter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.splinePlotter.Location = new System.Drawing.Point(20, 37);
+            this.splinePlotter.Location = new System.Drawing.Point(17, 25);
+            this.splinePlotter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.splinePlotter.Name = "splinePlotter";
-            this.splinePlotter.Size = new System.Drawing.Size(557, 331);
+            this.splinePlotter.Size = new System.Drawing.Size(412, 313);
             this.splinePlotter.TabIndex = 12;
             // 
             // label20
             // 
             this.label20.AutoSize = true;
             this.label20.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label20.Location = new System.Drawing.Point(3, 4);
+            this.label20.Location = new System.Drawing.Point(2, 3);
+            this.label20.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(150, 16);
+            this.label20.Size = new System.Drawing.Size(123, 13);
             this.label20.TabIndex = 11;
             this.label20.Text = "Cut Preview (TopDown):";
             // 
-            // pieceLable
-            // 
-            this.pieceLable.AutoSize = true;
-            this.pieceLable.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pieceLable.Location = new System.Drawing.Point(26, 68);
-            this.pieceLable.Name = "pieceLable";
-            this.pieceLable.Size = new System.Drawing.Size(55, 16);
-            this.pieceLable.TabIndex = 20;
-            this.pieceLable.Text = "Pieces: ";
-            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1365, 397);
-            this.Controls.Add(this.panel8);
+            this.ClientSize = new System.Drawing.Size(1024, 359);
             this.Controls.Add(this.panel7);
             this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
@@ -792,6 +874,8 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panel8);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "NL2SplineExtractor";
             ((System.ComponentModel.ISupportInitialize)(this.nodesPerSplitSelector)).EndInit();
@@ -876,8 +960,10 @@
         private System.Windows.Forms.CheckBox roundTripChkbx;
         private System.Windows.Forms.Panel panel8;
         private System.Windows.Forms.Label label20;
-        private SplinePlotter splinePlotter;
         private System.Windows.Forms.Label pieceLable;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.ComboBox outputfileTypeSelector;
+        private SplinePlotter splinePlotter;
     }
 }
 
