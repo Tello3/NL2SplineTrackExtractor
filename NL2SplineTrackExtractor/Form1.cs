@@ -100,6 +100,7 @@ namespace NL2SplineTrackExtractor
 
             if (Directory.Exists(outputFolderPath))
             {
+                loadData();
                 findSplitPoints();
                 extractTrackSplines();
 
@@ -164,10 +165,6 @@ namespace NL2SplineTrackExtractor
                 {
                     addLineToData(line);
                 }
-
-                splinePlotter.setSplinePoints(position);
-                findSplitPoints();
-                splinePlotter.setSplitPoints(splitPoints);
             }
             catch (IOException e)
             {
@@ -184,9 +181,9 @@ namespace NL2SplineTrackExtractor
             float[] floatValues = values.Select<string, float>(s => float.Parse(s, usFormat)).ToArray();
 
                                                                         //0: No.
-            position[((int)Axis.x)].Add(floatValues[1] * scale);        //1: posx
-            position[((int)Axis.y)].Add(floatValues[2] * scale);        //2: posy
-            position[((int)Axis.z)].Add(floatValues[3] * scale);        //3: posz
+            position[((int)Axis.x)].Add(floatValues[1] *100f* scale);        //1: posx
+            position[((int)Axis.y)].Add(floatValues[2] *100f* scale);        //2: posy
+            position[((int)Axis.z)].Add(floatValues[3] *100f* scale);        //3: posz
                                                                         //4: frontx
                                                                         //5: fronty
                                                                         //6: frontz
@@ -488,18 +485,24 @@ namespace NL2SplineTrackExtractor
                 {
                     inputPathTextBox.Text = openFileDialog.FileName;
                     inputFilePath = openFileDialog.FileName;
-                    loadData();
+                    onInputSelected();
                 }
             }
         }
-
+        private void onInputSelected()
+        {
+            loadData();
+            splinePlotter.setSplinePoints(position);
+            findSplitPoints();
+            splinePlotter.setSplitPoints(splitPoints);
+        }
         private void inputPathTextBox_TextChanged(object sender, EventArgs e)
         {
             inputFilePath = ((TextBox)sender).Text;
         }
         private void inputPathTextBox_LostFocus(object sender, EventArgs e)
         {
-            loadData();
+            onInputSelected();
         }
 
         private void caluclateBtn_Click(object sender, EventArgs e)
@@ -570,7 +573,9 @@ namespace NL2SplineTrackExtractor
         private void scalingTextbox_LostFocus(object sender, EventArgs e)
         {
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
+            {
                 scale = value;
+            }
         }
 
         private void affectDistancesCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -708,7 +713,27 @@ namespace NL2SplineTrackExtractor
         }
         private bool TryParseNumberFromTextbox(TextBox textBox, out float value)
         {
-            if (float.TryParse(textBox.Text.Trim(), NumberStyles.Number, usFormat, out value))
+            string text = textBox.Text.Trim();
+            bool parseSuccesful = true;
+
+            if (text.Contains(":"))
+            {
+                string[] parts = text.Split(':');
+                parseSuccesful = float.TryParse(parts[0], NumberStyles.Number, usFormat, out float value1);
+                parseSuccesful |= float.TryParse(parts[1], NumberStyles.Number, usFormat, out float value2);
+                value = value1/value2;
+            }
+            else if (text.Contains("/"))
+            {
+                string[] parts = text.Split('/');
+                parseSuccesful = float.TryParse(parts[0], NumberStyles.Number, usFormat, out float value1);
+                parseSuccesful |= float.TryParse(parts[1], NumberStyles.Number, usFormat, out float value2);
+                value = value1/value2;
+            }
+            else {
+                float.TryParse(text, NumberStyles.Number, usFormat, out value);
+            }
+            if(parseSuccesful)
             {
                 return true;
             }
