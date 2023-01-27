@@ -1,7 +1,7 @@
 # NL2SplineTrackExtractor
 A tool to extract individual track rails spline data from No Limits 2 Spline Data
 
-![Screenshot_11](https://user-images.githubusercontent.com/109047611/213882708-d755ef69-16a8-4eee-b646-e0e9682d74af.png)
+![Nl2SplineExtractor v1 2 0](https://user-images.githubusercontent.com/109047611/214991017-19cbfd51-2e0a-474d-877e-dbfdf0ce4720.png)
 
 # Features
   - Extract individual splines (e.g left, right, center,...)
@@ -19,10 +19,17 @@ A tool to extract individual track rails spline data from No Limits 2 Spline Dat
   - Create an output folder for the generated splines
   - Select file and folder
   - Select which rails/splines you want to export
-  - Select a split type or cut it yourself (left Mouse: add a split point, right: remove a split point, middle: reset viewport scaling)
+  - Select a split type or cut it yourself (left Mouse: add a split point, right: remove a split point, middle: reset viewport)
       - Split after x nodes will split the data into splines of x amount of points the last spline will be made up of the remaining points
       - Split into x pieces will split the data into evenly sized splines (If the number of points cant be split into x pieces their may not be exactly the amount of     pieces specified)
+  - Set the Scale you want by using a fraction("n/m") or typing "n:m" (e.g 1:15) or using a decimal number
+  - Adjust export scale depending on what your CAD software expects (Fusion360 expects the data in mm scaling)
   - Adjust the other settings to you liking (Note: for Fusion 360 you'll want to rotate 90° along the x axis)
   - Press "Calculate" and the output folder will be populated
  
   Have fun with the exported splines
+
+
+__(Note: make sure to use a decimal point not comma when trying to input decimal numbers)__
+
+Decimal numbers can also be written as "n/m" or "n:m" (e.g 0.5 = 1/2 = 1:2)
