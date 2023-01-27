@@ -25,7 +25,7 @@ namespace NL2SplineTrackExtractor
         
         //Split
         private List<int> splitPoints;
-        private SplitTypes splitType;
+        private SplitTypes splitType = SplitTypes.none;
         //Cut by nodes
         private int nodesPerSplit = 2;
         //Cut into pieces
@@ -161,7 +161,6 @@ namespace NL2SplineTrackExtractor
             }
             try
             {
-                splitTypeSelector.SelectedIndex = ((int)SplitTypes.none);
                 IEnumerable<string> lines = File.ReadLines(inputFilePath);
                 position = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
                 left = new List<float>[] { new List<float>(), new List<float>(), new List<float>() };
@@ -507,7 +506,8 @@ namespace NL2SplineTrackExtractor
             }
 
             splitPoints.Sort();
-            splinePlotter.setSplitPoints(splitPoints);
+            if(splitType != SplitTypes.custom)
+                splinePlotter.setSplitPoints(splitPoints);
         }
         private void findSplitPointsForDistance(int nodesPerSplit)
         {
