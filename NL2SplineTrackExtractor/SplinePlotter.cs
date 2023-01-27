@@ -212,10 +212,9 @@ namespace NL2SplineTrackExtractor
 
             scale = Math.Min(yScale, xScale);
 
-            offset.X = xOffset+ (-xOffset)*(float)Math.Exp(scale)+Width/2;
-            offset.Y = yOffset+ (-yOffset) * (float)Math.Exp(scale) + Height/ 2;
+            offset.X = xOffset *(float)Math.Exp(scale) + Width/2;
+            offset.Y = -yOffset *(float)Math.Exp(scale)+Height/2;
             renderSpline();
-
         }
         private void findDelta(List<float> values, out float delta, out float offset)
         {
@@ -236,7 +235,7 @@ namespace NL2SplineTrackExtractor
                 }
             }
             delta = Math.Abs(max - min);
-            offset = max + min;
+            offset = (max + min)/2;
         }
         private void DoPaint(object sender, PaintEventArgs e)
         {
@@ -298,7 +297,6 @@ namespace NL2SplineTrackExtractor
         {
             offset.X += newPoint.X - oldPoint.X;
             offset.Y += newPoint.Y - oldPoint.Y;
-
             renderSpline();
         }
         private void renderSpline()
