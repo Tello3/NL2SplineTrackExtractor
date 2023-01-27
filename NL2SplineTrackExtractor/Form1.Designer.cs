@@ -49,6 +49,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.pieceLable = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.exportScaleSelector = new System.Windows.Forms.ComboBox();
+            this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.outputfileTypeSelector = new System.Windows.Forms.ComboBox();
             this.roundTripChkbx = new System.Windows.Forms.CheckBox();
@@ -352,6 +354,8 @@
             // 
             this.panel2.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.exportScaleSelector);
+            this.panel2.Controls.Add(this.label22);
             this.panel2.Controls.Add(this.label21);
             this.panel2.Controls.Add(this.outputfileTypeSelector);
             this.panel2.Controls.Add(this.roundTripChkbx);
@@ -363,11 +367,33 @@
             this.panel2.Size = new System.Drawing.Size(366, 155);
             this.panel2.TabIndex = 21;
             // 
+            // exportScaleSelector
+            // 
+            this.exportScaleSelector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.exportScaleSelector.FormattingEnabled = true;
+            this.exportScaleSelector.Location = new System.Drawing.Point(259, 110);
+            this.exportScaleSelector.Margin = new System.Windows.Forms.Padding(2);
+            this.exportScaleSelector.Name = "exportScaleSelector";
+            this.exportScaleSelector.Size = new System.Drawing.Size(88, 21);
+            this.exportScaleSelector.TabIndex = 21;
+            this.exportScaleSelector.SelectedIndexChanged += new System.EventHandler(this.exportScaleSelector_SelectedIndexChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label22.Location = new System.Drawing.Point(256, 85);
+            this.label22.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(64, 13);
+            this.label22.TabIndex = 27;
+            this.label22.Text = "ExportScale";
+            // 
             // label21
             // 
             this.label21.AutoSize = true;
             this.label21.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label21.Location = new System.Drawing.Point(158, 88);
+            this.label21.Location = new System.Drawing.Point(145, 85);
             this.label21.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(78, 13);
@@ -378,9 +404,9 @@
             // 
             this.outputfileTypeSelector.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.outputfileTypeSelector.FormattingEnabled = true;
-            this.outputfileTypeSelector.Location = new System.Drawing.Point(196, 110);
+            this.outputfileTypeSelector.Location = new System.Drawing.Point(159, 108);
             this.outputfileTypeSelector.Name = "outputfileTypeSelector";
-            this.outputfileTypeSelector.Size = new System.Drawing.Size(124, 23);
+            this.outputfileTypeSelector.Size = new System.Drawing.Size(77, 23);
             this.outputfileTypeSelector.TabIndex = 25;
             // 
             // roundTripChkbx
@@ -500,7 +526,7 @@
             this.bottomDistanceTextBox.Name = "bottomDistanceTextBox";
             this.bottomDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.bottomDistanceTextBox.TabIndex = 14;
-            this.bottomDistanceTextBox.Text = "10";
+            this.bottomDistanceTextBox.Text = "1";
             this.bottomDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.bottomDistanceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textField_KeyDown);
             this.bottomDistanceTextBox.LostFocus += new System.EventHandler(this.bottomDistanceTextBox_LostFocus);
@@ -512,7 +538,7 @@
             this.rightDistanceTextBox.Name = "rightDistanceTextBox";
             this.rightDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.rightDistanceTextBox.TabIndex = 13;
-            this.rightDistanceTextBox.Text = "10";
+            this.rightDistanceTextBox.Text = "1";
             this.rightDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.rightDistanceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textField_KeyDown);
             this.rightDistanceTextBox.LostFocus += new System.EventHandler(this.rightDistanceTextBox_LostFocus);
@@ -524,7 +550,7 @@
             this.topDistanceTextBox.Name = "topDistanceTextBox";
             this.topDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.topDistanceTextBox.TabIndex = 12;
-            this.topDistanceTextBox.Text = "10";
+            this.topDistanceTextBox.Text = "1";
             this.topDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.topDistanceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textField_KeyDown);
             this.topDistanceTextBox.LostFocus += new System.EventHandler(this.topDistanceTextBox_LostFocus);
@@ -536,7 +562,7 @@
             this.leftDistanceTextBox.Name = "leftDistanceTextBox";
             this.leftDistanceTextBox.Size = new System.Drawing.Size(53, 20);
             this.leftDistanceTextBox.TabIndex = 11;
-            this.leftDistanceTextBox.Text = "10";
+            this.leftDistanceTextBox.Text = "1";
             this.leftDistanceTextBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.leftDistanceTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textField_KeyDown);
             this.leftDistanceTextBox.LostFocus += new System.EventHandler(this.leftDistanceTextBox_LostFocus);
@@ -548,9 +574,9 @@
             this.label5.Location = new System.Drawing.Point(2, 5);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.Size = new System.Drawing.Size(133, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Distance to Center:";
+            this.label5.Text = "Distance to Center (meter):";
             // 
             // panel5
             // 
@@ -964,6 +990,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.ComboBox outputfileTypeSelector;
         private SplinePlotter splinePlotter;
+        private System.Windows.Forms.ComboBox exportScaleSelector;
+        private System.Windows.Forms.Label label22;
     }
 }
 

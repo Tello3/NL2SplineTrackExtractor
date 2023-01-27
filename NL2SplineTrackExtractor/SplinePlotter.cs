@@ -212,8 +212,8 @@ namespace NL2SplineTrackExtractor
 
             scale = Math.Min(yScale, xScale);
 
-            offset.X = xOffset *(float)Math.Exp(scale) + Width/2;
-            offset.Y = -yOffset *(float)Math.Exp(scale)+Height/2;
+            offset.X = -xOffset *(float)Math.Exp(scale) + Width/2;
+            offset.Y = -yOffset *(float)Math.Exp(scale) + Height/2;
             renderSpline();
         }
         private void findDelta(List<float> values, out float delta, out float offset)

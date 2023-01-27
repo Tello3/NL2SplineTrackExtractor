@@ -40,6 +40,7 @@ namespace NL2SplineTrackExtractor
         private float rightScale = 1;
         private bool scaleAffectDistances = true;
         private bool scaleAffectOffset = true;
+        private ExportScales exportScale;
 
         //Rotation
         private float xRotation = 90;
@@ -66,13 +67,21 @@ namespace NL2SplineTrackExtractor
             pieces = 2,
             custom = 3,
         }
-
+        public enum ExportScales
+        {
+            m=0,
+            dm,
+            cm,
+            mm,
+        }
         public Form1()
         {
             InitializeComponent();
             
             splitTypeSelector.Items.AddRange(new string[] { "Dont't split", "Split after x nodes", "Split into x pieces", "Custom" });
             splitTypeSelector.SelectedIndex = 0;
+            exportScaleSelector.Items.AddRange(Enum.GetNames(typeof(ExportScales)));
+            exportScaleSelector.SelectedIndex = 0;
             outputfileTypeSelector.Items.AddRange(new string[] { ".csv",".txt"});
             outputfileTypeSelector.SelectedIndex = 0;
             nodesPerSplitSelector.Minimum = 1;
@@ -173,26 +182,50 @@ namespace NL2SplineTrackExtractor
             }
             return true;
         }
-        
+
         private void addLineToData(string line)
         {
             string[] values = line.Split('\t');
             float normalScale = scaleAffectDistances ? scale : 1;
+            float exportMultiplier = 1;
+            switch (exportScale)
+            {
+                case (ExportScales.m):
+                    {
+                        exportMultiplier = 0.1f;
+                    }
+                    break;
+                case (ExportScales.dm):
+                    {
+                        exportMultiplier = 1;
+                    }
+                    break;
+                case (ExportScales.cm):
+                    {
+                        exportMultiplier = 10;
+                    }
+                    break;
+                case (ExportScales.mm):
+                    {
+                        exportMultiplier = 100;
+                    }
+                    break;
+            }
             float[] floatValues = values.Select<string, float>(s => float.Parse(s, usFormat)).ToArray();
 
-                                                                        //0: No.
-            position[((int)Axis.x)].Add(floatValues[1] *100f* scale);        //1: posx
-            position[((int)Axis.y)].Add(floatValues[2] *100f* scale);        //2: posy
-            position[((int)Axis.z)].Add(floatValues[3] *100f* scale);        //3: posz
-                                                                        //4: frontx
-                                                                        //5: fronty
-                                                                        //6: frontz
-            left[((int)Axis.x)].Add(floatValues[7] * normalScale);      //7: leftx
-            left[((int)Axis.y)].Add(floatValues[8] * normalScale);      //8: lefty
-            left[((int)Axis.z)].Add(floatValues[9] * normalScale);      //9: leftz
-            up[((int)Axis.x)].Add(floatValues[10] * normalScale);       //10: upx
-            up[((int)Axis.y)].Add(floatValues[11] * normalScale);       //11: upy
-            up[((int)Axis.z)].Add(floatValues[12] * normalScale);       //12: upz
+            //0: No.
+            position[((int)Axis.x)].Add(floatValues[1] * scale * exportMultiplier);        //1: posx
+            position[((int)Axis.y)].Add(floatValues[2] * scale * exportMultiplier);        //2: posy
+            position[((int)Axis.z)].Add(floatValues[3] * scale * exportMultiplier);        //3: posz
+                                                                               //4: frontx
+                                                                               //5: fronty
+                                                                               //6: frontz
+            left[((int)Axis.x)].Add(floatValues[7] * normalScale * exportMultiplier);      //7: leftx
+            left[((int)Axis.y)].Add(floatValues[8] * normalScale * exportMultiplier);      //8: lefty
+            left[((int)Axis.z)].Add(floatValues[9] * normalScale * exportMultiplier);      //9: leftz
+            up[((int)Axis.x)].Add(floatValues[10] * normalScale * exportMultiplier);       //10: upx
+            up[((int)Axis.y)].Add(floatValues[11] * normalScale * exportMultiplier);       //11: upy
+            up[((int)Axis.z)].Add(floatValues[12] * normalScale * exportMultiplier);       //12: upz
         }
 
         #endregion
@@ -600,25 +633,25 @@ namespace NL2SplineTrackExtractor
         private void topDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
-                topScale = value / 10f; 
+                topScale = value; 
         }
 
         private void rightDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
-                rightScale = value / 10f;
+                rightScale = value;
         }
 
         private void bottomDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
             if (TryParseNumberFromTextbox((TextBox)sender, out float value))
-                bottomScale = value / 10f;
+                bottomScale = value;
         }
 
         private void leftDistanceTextBox_LostFocus(object sender, EventArgs e)
         {
             if (TryParseNumberFromTextbox((TextBox) sender, out float value))
-                leftScale = value / 10f;
+                leftScale = value;
         }
 
         private void affectOffsetCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -746,5 +779,9 @@ namespace NL2SplineTrackExtractor
 
         #endregion
 
+        private void exportScaleSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            exportScale = (ExportScales)((ComboBox)sender).SelectedIndex;
+        }
     }
 }
