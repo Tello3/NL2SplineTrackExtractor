@@ -89,8 +89,15 @@
             this.xOffsetTextbox = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.splinePlotter = new NL2SplineTrackExtractor.SplinePlotter();
             this.label20 = new System.Windows.Forms.Label();
+            this.label23 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label27 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.splinePlotter = new NL2SplineTrackExtractor.SplinePlotter();
             ((System.ComponentModel.ISupportInitialize)(this.nodesPerSplitSelector)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.piecesSelector)).BeginInit();
             this.panel1.SuspendLayout();
@@ -460,6 +467,10 @@
             // 
             this.panel4.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel4.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel4.Controls.Add(this.label29);
+            this.panel4.Controls.Add(this.label28);
+            this.panel4.Controls.Add(this.label27);
+            this.panel4.Controls.Add(this.label26);
             this.panel4.Controls.Add(this.label19);
             this.panel4.Controls.Add(this.label18);
             this.panel4.Controls.Add(this.label17);
@@ -479,7 +490,7 @@
             // 
             this.label19.AutoSize = true;
             this.label19.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label19.Location = new System.Drawing.Point(129, 74);
+            this.label19.Location = new System.Drawing.Point(109, 75);
             this.label19.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(32, 13);
@@ -490,7 +501,7 @@
             // 
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label18.Location = new System.Drawing.Point(70, 111);
+            this.label18.Location = new System.Drawing.Point(54, 118);
             this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(40, 13);
@@ -501,7 +512,7 @@
             // 
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label17.Location = new System.Drawing.Point(9, 74);
+            this.label17.Location = new System.Drawing.Point(2, 74);
             this.label17.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(25, 13);
@@ -512,7 +523,7 @@
             // 
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.label16.Location = new System.Drawing.Point(69, 30);
+            this.label16.Location = new System.Drawing.Point(54, 34);
             this.label16.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(26, 13);
@@ -521,7 +532,7 @@
             // 
             // bottomDistanceTextBox
             // 
-            this.bottomDistanceTextBox.Location = new System.Drawing.Point(70, 127);
+            this.bottomDistanceTextBox.Location = new System.Drawing.Point(57, 133);
             this.bottomDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.bottomDistanceTextBox.Name = "bottomDistanceTextBox";
             this.bottomDistanceTextBox.Size = new System.Drawing.Size(53, 20);
@@ -533,7 +544,7 @@
             // 
             // rightDistanceTextBox
             // 
-            this.rightDistanceTextBox.Location = new System.Drawing.Point(128, 89);
+            this.rightDistanceTextBox.Location = new System.Drawing.Point(112, 89);
             this.rightDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.rightDistanceTextBox.Name = "rightDistanceTextBox";
             this.rightDistanceTextBox.Size = new System.Drawing.Size(53, 20);
@@ -545,7 +556,7 @@
             // 
             // topDistanceTextBox
             // 
-            this.topDistanceTextBox.Location = new System.Drawing.Point(70, 46);
+            this.topDistanceTextBox.Location = new System.Drawing.Point(57, 49);
             this.topDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.topDistanceTextBox.Name = "topDistanceTextBox";
             this.topDistanceTextBox.Size = new System.Drawing.Size(53, 20);
@@ -557,7 +568,7 @@
             // 
             // leftDistanceTextBox
             // 
-            this.leftDistanceTextBox.Location = new System.Drawing.Point(11, 89);
+            this.leftDistanceTextBox.Location = new System.Drawing.Point(5, 89);
             this.leftDistanceTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.leftDistanceTextBox.Name = "leftDistanceTextBox";
             this.leftDistanceTextBox.Size = new System.Drawing.Size(53, 20);
@@ -574,9 +585,9 @@
             this.label5.Location = new System.Drawing.Point(2, 5);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(133, 13);
+            this.label5.Size = new System.Drawing.Size(98, 13);
             this.label5.TabIndex = 10;
-            this.label5.Text = "Distance to Center (meter):";
+            this.label5.Text = "Distance to Center:";
             // 
             // panel5
             // 
@@ -589,10 +600,10 @@
             this.panel5.Controls.Add(this.label15);
             this.panel5.Controls.Add(this.yRotationTextbox);
             this.panel5.Controls.Add(this.zRotationTextbox);
-            this.panel5.Location = new System.Drawing.Point(152, 163);
+            this.panel5.Location = new System.Drawing.Point(180, 163);
             this.panel5.Margin = new System.Windows.Forms.Padding(2);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(222, 106);
+            this.panel5.Size = new System.Drawing.Size(194, 106);
             this.panel5.TabIndex = 21;
             this.panel5.Click += new System.EventHandler(this.panel5_Click);
             // 
@@ -748,6 +759,9 @@
             // 
             this.panel7.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.panel7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel7.Controls.Add(this.label25);
+            this.panel7.Controls.Add(this.label24);
+            this.panel7.Controls.Add(this.label23);
             this.panel7.Controls.Add(this.label12);
             this.panel7.Controls.Add(this.label11);
             this.panel7.Controls.Add(this.label10);
@@ -758,7 +772,7 @@
             this.panel7.Location = new System.Drawing.Point(9, 163);
             this.panel7.Margin = new System.Windows.Forms.Padding(2);
             this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(139, 106);
+            this.panel7.Size = new System.Drawing.Size(167, 106);
             this.panel7.TabIndex = 22;
             // 
             // label12
@@ -856,15 +870,6 @@
             this.panel8.Size = new System.Drawing.Size(447, 352);
             this.panel8.TabIndex = 24;
             // 
-            // splinePlotter
-            // 
-            this.splinePlotter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.splinePlotter.Location = new System.Drawing.Point(17, 25);
-            this.splinePlotter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.splinePlotter.Name = "splinePlotter";
-            this.splinePlotter.Size = new System.Drawing.Size(412, 313);
-            this.splinePlotter.TabIndex = 12;
-            // 
             // label20
             // 
             this.label20.AutoSize = true;
@@ -875,6 +880,92 @@
             this.label20.Size = new System.Drawing.Size(123, 13);
             this.label20.TabIndex = 11;
             this.label20.Text = "Cut Preview (TopDown):";
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label23.Location = new System.Drawing.Point(123, 30);
+            this.label23.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(15, 13);
+            this.label23.TabIndex = 25;
+            this.label23.Text = "m";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label24.Location = new System.Drawing.Point(123, 52);
+            this.label24.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(15, 13);
+            this.label24.TabIndex = 26;
+            this.label24.Text = "m";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label25.Location = new System.Drawing.Point(123, 75);
+            this.label25.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(15, 13);
+            this.label25.TabIndex = 27;
+            this.label25.Text = "m";
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label26.Location = new System.Drawing.Point(62, 92);
+            this.label26.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(15, 13);
+            this.label26.TabIndex = 28;
+            this.label26.Text = "m";
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label27.Location = new System.Drawing.Point(114, 136);
+            this.label27.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(15, 13);
+            this.label27.TabIndex = 35;
+            this.label27.Text = "m";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label28.Location = new System.Drawing.Point(167, 92);
+            this.label28.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(15, 13);
+            this.label28.TabIndex = 36;
+            this.label28.Text = "m";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.label29.Location = new System.Drawing.Point(114, 53);
+            this.label29.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(15, 13);
+            this.label29.TabIndex = 37;
+            this.label29.Text = "m";
+            // 
+            // splinePlotter
+            // 
+            this.splinePlotter.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.splinePlotter.Location = new System.Drawing.Point(17, 25);
+            this.splinePlotter.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.splinePlotter.Name = "splinePlotter";
+            this.splinePlotter.Size = new System.Drawing.Size(412, 313);
+            this.splinePlotter.TabIndex = 12;
             // 
             // Form1
             // 
@@ -992,6 +1083,13 @@
         private SplinePlotter splinePlotter;
         private System.Windows.Forms.ComboBox exportScaleSelector;
         private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label23;
     }
 }
 

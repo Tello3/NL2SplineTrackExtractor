@@ -81,7 +81,7 @@ namespace NL2SplineTrackExtractor
             splitTypeSelector.Items.AddRange(new string[] { "Dont't split", "Split after x nodes", "Split into x pieces", "Custom" });
             splitTypeSelector.SelectedIndex = 0;
             exportScaleSelector.Items.AddRange(Enum.GetNames(typeof(ExportScales)));
-            exportScaleSelector.SelectedIndex = 0;
+            exportScaleSelector.SelectedIndex = 3;
             outputfileTypeSelector.Items.AddRange(new string[] { ".csv",".txt"});
             outputfileTypeSelector.SelectedIndex = 0;
             nodesPerSplitSelector.Minimum = 1;
@@ -411,6 +411,30 @@ namespace NL2SplineTrackExtractor
 
         private void rotateAndOffset(float x, float y, float z, out float newX, out float newY, out float newZ)
         {
+            float exportMultiplier = 1;
+            switch (exportScale)
+            {
+                case (ExportScales.m):
+                    {
+                        exportMultiplier = 0.1f;
+                    }
+                    break;
+                case (ExportScales.dm):
+                    {
+                        exportMultiplier = 1;
+                    }
+                    break;
+                case (ExportScales.cm):
+                    {
+                        exportMultiplier = 10;
+                    }
+                    break;
+                case (ExportScales.mm):
+                    {
+                        exportMultiplier = 100;
+                    }
+                    break;
+            }
             //Rotation
             // X Axis
             newX = x;
@@ -436,15 +460,15 @@ namespace NL2SplineTrackExtractor
             //Offsets
             if (scaleAffectOffset)
             {
-                newX += xOffset * scale;
-                newY += yOffset * scale;
-                newZ += zOffset * scale;
+                newX += xOffset * scale * exportMultiplier;
+                newY += yOffset * scale * exportMultiplier;
+                newZ += zOffset * scale * exportMultiplier;
             }
             else
             {
-                newX += xOffset;
-                newY += yOffset;
-                newZ += zOffset;
+                newX += xOffset * exportMultiplier;
+                newY += yOffset * exportMultiplier;
+                newZ += zOffset * exportMultiplier;
             }
             
         }
